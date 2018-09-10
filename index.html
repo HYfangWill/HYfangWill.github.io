@@ -249,6 +249,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/vue-mvvm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfangwill">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hyfang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/10/vue-mvvm/" itemprop="url">vue双向数据绑定</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T15:54:35+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p>model-view-viewmodel<br>基于前端开发的架构模式，核心是viewmodel提供对view和model的双向数据绑定</p>
+<ul>
+<li>用model渲染view，一旦model变更，重新渲染</li>
+<li>view的交互改变状态和数据，更新model<h2 id="vue-js实现"><a href="#vue-js实现" class="headerlink" title="vue.js实现"></a>vue.js实现</h2><h3 id="数据劫持"><a href="#数据劫持" class="headerlink" title="数据劫持"></a>数据劫持</h3>&emsp;&emsp;vue采用ES5的<strong>Object.defineProperty</strong>的getter和setter，结合观察者模式来实现数据绑定。<br>&emsp;&emsp;当一个JS对象传给Vue实例作为其data选项时，vue会遍历它的属性，用Object.defineProperty转为getter和setter，并添加vue追踪依赖，一旦属性被访问被修改时通知变化。<br>&emsp;&emsp;vue的绑定过程分为两个步骤：</li>
+</ul>
+<ol>
+<li>compile：对目标元素进行解析，识别出所有绑定在元素(通过el属性传入)上的指令</li>
+<li>link过程：建立指令与数据(通过data属性传入初始值)的绑定关系，并以数据的初始值进行渲染，订阅Watcher，此时Watcher会将自己添加到消息订阅器(Dep),初始化完毕  <h3 id="vue双向数据绑定的对象"><a href="#vue双向数据绑定的对象" class="headerlink" title="vue双向数据绑定的对象"></a>vue双向数据绑定的对象</h3></li>
+</ol>
+<ul>
+<li>Observer数据监听器<br>能够对数据对象的所有属性进行监听(Object.defineProperty实现)，发现变化就通知Watcher订阅者</li>
+<li>complie指令解析器<br>对每个元素节点的指令进行扫描解析，初始化视图，根据指令模板替换数据，绑定Observer和compile的桥梁(Watcher)，可以订阅到每个属性变动的通知，执行指令绑定的相应的回调函数</li>
+<li>Watcher订阅者<br>作为Observer和compile的桥梁，订阅收到的属性变动通知，执行指令绑定的相应的回调函数</li>
+<li>Dep消息订阅器<br>内部维护了一个数组，用来收集Watcher，数据变动触发notify方法，再调用update方法<pre class="mermaid">graph LR
+A[new MVVM] --> B[Observer]
+B --> |通知变化| C((Dep))
+C --> |通知变化| D[Watcher]
+D --> |添加订阅者| C
+A --> E[complie]
+E --> |订阅数据变化绑定更新函数| D
+E --> |初始化视图| F((Update))
+D --> |更新视图| F</pre>
+
+</li>
+</ul>
+<h2 id="其他双向数据绑定方式"><a href="#其他双向数据绑定方式" class="headerlink" title="其他双向数据绑定方式"></a>其他双向数据绑定方式</h2><h3 id="发布者-订阅者"><a href="#发布者-订阅者" class="headerlink" title="发布者-订阅者"></a>发布者-订阅者</h3><p>一般是通过sub、pub的方法实现数据和视图的绑定监听，更新数据方法，vm.set(“property”, value)  </p>
+<h3 id="脏值检测"><a href="#脏值检测" class="headerlink" title="脏值检测"></a>脏值检测</h3><p>通过脏值检测的方式，对所有数据和视图绑定关系进行检测，识别是否有数据发生改变，有变化进行处理，可能引发其他数据的改变，可能会循环多次，知道数据不再变化，将变更的数据更新视图。<br>angular.js就是使用这种方法，在指定的事件触发时，进入脏值检测，比如</p>
+<ul>
+<li>DOM事件</li>
+<li>XHR响应事件</li>
+<li>浏览器Location变更事件</li>
+<li>Timer事件($timeout, $interval)</li>
+<li>执行$digest()或$apply()<h2 id="Plus"><a href="#Plus" class="headerlink" title="Plus"></a>Plus</h2><h3 id="Object-defineProperty-obj-prop-value"><a href="#Object-defineProperty-obj-prop-value" class="headerlink" title="Object.defineProperty(obj, prop, value)"></a>Object.defineProperty(obj, prop, value)</h3></li>
+<li>功能<br>直接在目标对象定义一个新属性，或修改现有属性，并返回这个对象</li>
+<li>参数<br>obj：目标对象<br>prop：要定义或者修改的属性<br>value：将被定义或修改的属性值  </li>
+<li>返回<br>目标对象  </li>
+<li>注意<br>默认情况下，添加的属性是不可变的</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/visit-website/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -342,7 +521,7 @@
       
         
           
-            <h1 id="访问网页的过程"><a href="#访问网页的过程" class="headerlink" title="访问网页的过程"></a>访问网页的过程</h1><p>从输入地址到页面显示的流程</p>
+            <p>从输入地址到页面显示的流程</p>
 <pre class="mermaid">graph LR
 A[输入URL] --> B[DNS解析URL]
 B --> C[TCP连接]
@@ -776,7 +955,7 @@ F --> A[分词索引和统计词频];</pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -798,7 +977,7 @@ F --> A[分词索引和统计词频];</pre>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
