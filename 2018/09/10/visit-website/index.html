@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="front-end," />
+  <meta name="keywords" content="front-end,browser,network," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="搜索引擎优化，全称Search Engine Optimization，它帮助网站更加符合搜索引擎抓取和用户喜好，提升搜索结果排序名次  原理 搜索引擎蜘蛛采用深度优先+宽度优先+权重优先+重访抓取的策略，发现一个链接，下载该网页后，加入临时库，提取网页链接，再提取网页中的链接，依次循环。  graph LR; A[发现链接] --&amp;gt; B[下载网页]; B --&amp;gt; C[加入临时库]; C --&amp;gt;">
-<meta name="keywords" content="front-end">
+<meta name="description" content="访问网页的过程从输入地址到页面显示的流程 graph LR A[输入URL] --&amp;gt; B[DNS解析URL] B --&amp;gt; C[TCP连接] C --&amp;gt; D[浏览器发送请求] D --&amp;gt; E[服务器响应] E --&amp;gt; F[关闭连接] G[浏览器下载文件] --&amp;gt; H[浏览器解析文件] H --&amp;gt; I[浏览器布局渲染]   输入URL DNS解析URL地址中的域名返回IP 浏览器首先先询问本地host">
+<meta name="keywords" content="front-end,browser,network">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SEO">
-<meta property="og:url" content="https://hyfangwill.github.io/2018/09/09/seo/index.html">
+<meta property="og:title" content="浏览器访问网页">
+<meta property="og:url" content="https://hyfangwill.github.io/2018/09/10/visit-website/index.html">
 <meta property="og:site_name" content="hyfang&#39;s blog">
-<meta property="og:description" content="搜索引擎优化，全称Search Engine Optimization，它帮助网站更加符合搜索引擎抓取和用户喜好，提升搜索结果排序名次  原理 搜索引擎蜘蛛采用深度优先+宽度优先+权重优先+重访抓取的策略，发现一个链接，下载该网页后，加入临时库，提取网页链接，再提取网页中的链接，依次循环。  graph LR; A[发现链接] --&amp;gt; B[下载网页]; B --&amp;gt; C[加入临时库]; C --&amp;gt;">
+<meta property="og:description" content="访问网页的过程从输入地址到页面显示的流程 graph LR A[输入URL] --&amp;gt; B[DNS解析URL] B --&amp;gt; C[TCP连接] C --&amp;gt; D[浏览器发送请求] D --&amp;gt; E[服务器响应] E --&amp;gt; F[关闭连接] G[浏览器下载文件] --&amp;gt; H[浏览器解析文件] H --&amp;gt; I[浏览器布局渲染]   输入URL DNS解析URL地址中的域名返回IP 浏览器首先先询问本地host">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-10T07:17:12.400Z">
+<meta property="og:updated_time" content="2018-09-10T07:17:12.610Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SEO">
-<meta name="twitter:description" content="搜索引擎优化，全称Search Engine Optimization，它帮助网站更加符合搜索引擎抓取和用户喜好，提升搜索结果排序名次  原理 搜索引擎蜘蛛采用深度优先+宽度优先+权重优先+重访抓取的策略，发现一个链接，下载该网页后，加入临时库，提取网页链接，再提取网页中的链接，依次循环。  graph LR; A[发现链接] --&amp;gt; B[下载网页]; B --&amp;gt; C[加入临时库]; C --&amp;gt;">
+<meta name="twitter:title" content="浏览器访问网页">
+<meta name="twitter:description" content="访问网页的过程从输入地址到页面显示的流程 graph LR A[输入URL] --&amp;gt; B[DNS解析URL] B --&amp;gt; C[TCP连接] C --&amp;gt; D[浏览器发送请求] D --&amp;gt; E[服务器响应] E --&amp;gt; F[关闭连接] G[浏览器下载文件] --&amp;gt; H[浏览器解析文件] H --&amp;gt; I[浏览器布局渲染]   输入URL DNS解析URL地址中的域名返回IP 浏览器首先先询问本地host">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/09/seo/"/>
+  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/10/visit-website/"/>
 
 
 
 
 
-  <title>SEO | hyfang's blog</title>
+  <title>浏览器访问网页 | hyfang's blog</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/09/seo/">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/visit-website/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hyfangwill">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SEO</h1>
+          <h1 class="post-title" itemprop="name headline">浏览器访问网页</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T12:01:23+08:00">
-                2018-09-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T14:18:47+08:00">
+                2018-09-10
               </time>
             
 
@@ -342,41 +342,55 @@
       
 
       
-        <p>搜索引擎优化，全称Search Engine Optimization，它帮助网站更加符合搜索引擎抓取和用户喜好，提升搜索结果排序名次 </p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
-<li><strong>搜索引擎蜘蛛</strong>采用深度优先+宽度优先+权重优先+重访抓取的策略，发现一个链接，下载该网页后，加入临时库，提取网页链接，再提取网页中的链接，依次循环。  <pre class="mermaid">graph LR;
-A[发现链接] --> B[下载网页];
-B --> C[加入临时库];
-C --> A;</pre></li>
-<li><strong>数据分析系统</strong>获取网页后，删除html代码提取内容，留下网页主题，删除重复网页和内容，正文内容分词并排列，存入索引库和统计词频<pre class="mermaid">graph LR;
-D[删除html代码] --> E[提取内容主题];
-E --> F[去重];
-F --> A[分词索引和统计词频];</pre>
+        <h1 id="访问网页的过程"><a href="#访问网页的过程" class="headerlink" title="访问网页的过程"></a>访问网页的过程</h1><p>从输入地址到页面显示的流程</p>
+<pre class="mermaid">graph LR
+A[输入URL] --> B[DNS解析URL]
+B --> C[TCP连接]
+C --> D[浏览器发送请求]
+D --> E[服务器响应]
+E --> F[关闭连接]
+G[浏览器下载文件] --> H[浏览器解析文件]
+H --> I[浏览器布局渲染]</pre>
 
+<ol>
+<li>输入URL</li>
+<li>DNS解析URL地址中的域名返回IP<ol>
+<li>浏览器首先先询问本地hosts文件，检查域名是否有对应的IP</li>
+<li>如果没有对应IP，<strong>递归查询</strong>本地DNS服务器，DNS服务器<strong>迭代查询</strong>根、com、www.blog.com的DNS服务器，获得最终的IP</li>
+</ol>
 </li>
-</ul>
-<h2 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h2><ul>
-<li>meta  <ul>
-<li>title网页主题、description网页描述、keywords关键词精确</li>
-</ul>
+<li>建立TCP连接<br>即经典的TCP三次挥手<ol>
+<li>客户端请求连接(SYN数据包)</li>
+<li>服务器确认信息(SYN/ACK数据包)</li>
+<li>客户端确认应答(ACK数据包)</li>
+</ol>
 </li>
-<li>html、css、js  <ul>
-<li>html与css、js结构分离，重要内容优先加载、扁平化层级</li>
-</ul>
-</li>
-<li>标签<ul>
-<li>&lt;h1>的权重仅次于&lt;title>，内容精确，善用&lt;h2>&lt;em>&lt;strong>等标签</li>
-<li>&lt;img>图片设置好title或者alt属性</li>
-<li>&lt;a>标签设置好title、nofollow属性、锚文本</li>
-</ul>
-</li>
-<li>内容<ul>
-<li>第一个出现关键词最好加粗</li>
-<li>关键词频率合理增加</li>
-<li>增加友情链接、RSS订阅、站点订阅、404页面、长尾关键词</li>
+<li>浏览器发送http请求<br>http请求内容：<ul>
+<li>报文首部：请求行(URI/HTTP版本/请求方法)、请求首部字段(传递重要信息)、通用首部字段、实体首部字段、其他</li>
+<li>空行：表示头部结束，不可省略</li>
+<li>报文主体</li>
 </ul>
 </li>
+<li>服务器处理并响应<br>响应请求<ul>
+<li>报文首部：状态行(状态码和信息)、响应首部字段、通用首部字段、实体首部字段、其他</li>
+<li>空行：表示头部结束，不可省略</li>
+<li>报文主体</li>
 </ul>
+</li>
+<li>关闭连接<br>TCP四次挥手<ol>
+<li>客户端请求关闭FIN</li>
+<li>服务器确认请求关闭ACK</li>
+<li>服务器请求关闭FIN</li>
+<li>客户端确认请求关闭ACK</li>
+</ol>
+</li>
+<li>浏览器解析HTML  <ol>
+<li>浏览器加载HTML、CSS、JS、图片、视频等</li>
+<li>浏览器解析HTML生成DOM树，解析CSS生成CSS规则树，两者生成渲染树（渲染树与DOM树区别是，渲染里没有head和display为none的节点）</li>
+</ol>
+</li>
+<li>浏览器布局渲染<br>根据渲染树布局，计算CSS样式，显示页面，可能引起重绘和重排，其中重绘是屏幕的一部分重画，不影响整体布局，如改个颜色，重排需要重新计算DOM树，显示最后页面</li>
+</ol>
 
       
     </div>
@@ -396,6 +410,10 @@ F --> A[分词索引和统计词频];</pre>
           
             <a href="/tags/front-end/" rel="tag"># front-end</a>
           
+            <a href="/tags/browser/" rel="tag"># browser</a>
+          
+            <a href="/tags/network/" rel="tag"># network</a>
+          
         </div>
       
 
@@ -407,8 +425,8 @@ F --> A[分词索引和统计词频];</pre>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/09/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/09/09/seo/" rel="next" title="SEO">
+                <i class="fa fa-chevron-left"></i> SEO
               </a>
             
           </div>
@@ -416,10 +434,6 @@ F --> A[分词索引和统计词频];</pre>
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/10/visit-website/" rel="prev" title="浏览器访问网页">
-                浏览器访问网页 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -567,7 +581,7 @@ F --> A[分词索引和统计词频];</pre>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端优化"><span class="nav-number">2.</span> <span class="nav-text">前端优化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#访问网页的过程"><span class="nav-number">1.</span> <span class="nav-text">访问网页的过程</span></a></li></ol></div>
             
 
           </div>
