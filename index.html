@@ -249,6 +249,355 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/promise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfangwill">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hyfang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/10/promise/" itemprop="url">Promise</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T22:47:43+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>JS的所有代码都是单线程执行的<br>这个单线程的缺陷，导致JavaScript的所有网络操作、浏览器时间，都必须异步执行，异步执行可以用回调函数实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function callback()&#123;</span><br><span class="line">    console.log(&quot;working&quot;);</span><br><span class="line">&#125;</span><br><span class="line">console.log(&quot;before work&quot;);</span><br><span class="line">setTimeout(callback, 1000);//1秒钟后调用callback</span><br><span class="line">console.log(&quot;after work&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">before work</span><br><span class="line">after work</span><br><span class="line">// 等待1秒或1秒左右后</span><br><span class="line">working</span><br></pre></td></tr></table></figure></p>
+<p>可见，异步操作将会在将来的某个时间点触发函数调用</p>
+<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><p>AJAX是典型的异步操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">request.onreadystatechange = function()&#123;</span><br><span class="line">    if(request.readyState === 4)&#123;</span><br><span class="line">        if(request.status === 200)&#123;</span><br><span class="line">            return success(request.responseText);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return fail(request.status);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>将以上改为链式写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ajax = ajaxGet(url);</span><br><span class="line">ajax.ifSuccess(success).ifFail(fail);</span><br></pre></td></tr></table></figure></p>
+<p>链式写法的好处在于，先统一执行AJAX逻辑，不关心处理结果，根据结果成功或者失败，在将来的某个时候调用success函数或者fail函数，<strong>这种“承诺将来会执行”的对象称为Promise对象</strong></p>
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><p>非Promise的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function test(resolve, reject)&#123;</span><br><span class="line">    var timeOut = Math.random() * 2;</span><br><span class="line">    log(&quot;set time to:&quot;+timeOut+&quot; seconds&quot;);</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">        if(timeOut&lt;1)&#123;</span><br><span class="line">            log(&quot;call resolve()...&quot;);</span><br><span class="line">            resolve(&quot;200 OK&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            log(&quot;call reject()...&quot;);</span><br><span class="line">            reject(&quot;timeout in &quot;+timeOut+&quot; seconds&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, timeOut * 1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>test()函数接受2个参数，这2个参数都是函数，test执行后，一种条件下执行resolve，另一种执行reject，不需要关心具体处理方式<br>Promise例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var p1 = new Promise(test);</span><br><span class="line">var p2 = p1.then(function(result)&#123;</span><br><span class="line">    console.log(&quot;成功：&quot;+result);</span><br><span class="line">&#125;);</span><br><span class="line">var p3 = p2.catch(function(reason)&#123;</span><br><span class="line">    console.log(&quot;失败：&quot;+reason);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>简化写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new Promise(test).then(function(result)&#123;</span><br><span class="line">    console.log(&quot;成功：&quot;+result);</span><br><span class="line">&#125;).catch(function(reason)&#123;</span><br><span class="line">    console.log(&quot;失败：&quot;+reason);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>Promise可以将执行代码和处理结果的代码清晰分离，先执test()函数，根据情况执行then或catch，其中用于执行then和catch的函数function(result)和function(reason)执行，会自动与resolve和reject关联<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[new Promise] --&gt; B[执行函数]</span><br><span class="line">B --&gt;|then| C[on_resolve]</span><br><span class="line">B --&gt;|catch| D[on_reject]</span><br></pre></td></tr></table></figure></p>
+<h3 id="多异步任务"><a href="#多异步任务" class="headerlink" title="多异步任务"></a>多异步任务</h3><p>p1、p2、p3都是Promise对象</p>
+<ul>
+<li><p>串行执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p1.then(p2).then(p3).catch(handlerError);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>并行执行等待所有结果返回后再执行then</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Promise.all([p1, p2]).then(function(results)&#123;</span><br><span class="line">    // results是p1,p2的执行结果的数组</span><br><span class="line">    console.log(results);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>并行执行只需要最先返回的一个结果返回就可以执行then</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Promise.race([p1, p2]).then(function(result)&#123;</span><br><span class="line">    console.log(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/box-model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfangwill">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hyfang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/10/box-model/" itemprop="url">CSS盒模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T22:33:41+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/box-model.png" alt="盒模型"></p>
+<h2 id="IE盒模型和W3C盒模型的区别"><a href="#IE盒模型和W3C盒模型的区别" class="headerlink" title="IE盒模型和W3C盒模型的区别"></a>IE盒模型和W3C盒模型的区别</h2><ul>
+<li>width和height<br>IE盒模型content+padding+border，W3C盒模型content</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="设置盒模型"><a href="#设置盒模型" class="headerlink" title="设置盒模型"></a>设置盒模型</h3><ul>
+<li>box-sizing可以改变浏览器默认的盒模型<ul>
+<li>content-box：W3C盒模型</li>
+<li>padding-box：content+padding==width</li>
+<li>border-box：IE盒模型</li>
+</ul>
+</li>
+</ul>
+<h3 id="对行内元素的设置"><a href="#对行内元素的设置" class="headerlink" title="对行内元素的设置"></a>对行内元素的设置</h3><ul>
+<li>width/height无效</li>
+<li>padding-top/padding-bottom/margin-top/margin-bottom无效</li>
+<li>padding-left/padding-right/margin-left/margin-right有效</li>
+<li>line-height有效</li>
+</ul>
+<h3 id="margin-auto的使用"><a href="#margin-auto的使用" class="headerlink" title="margin: auto的使用"></a>margin: auto的使用</h3><ul>
+<li>元素没有设置width和height，会自动填充容器</li>
+<li>元素设置了width或height（有效情况下），自动填充会被覆盖，margin为0，因此如果margin设置为auto，可以填充空白，使得元素水平居中</li>
+</ul>
+<h3 id="百分比的使用"><a href="#百分比的使用" class="headerlink" title="百分比的使用"></a>百分比的使用</h3><p>百分比是相对父元素而言的，这个父元素分为两种：</p>
+<ol>
+<li>如果该元素position没有定位成relative或者absolute，父元素是已经定位的父元素或者是body</li>
+<li>如果该元素position没有定位成relative或者absolute，父元素是直接父元素</li>
+</ol>
+<p>具体使用</p>
+<ul>
+<li>width是相对于父元素的width，height是相对于父元素的height</li>
+<li>padding/margin不管上下左右，是相对于父元素的width</li>
+</ul>
+<h3 id="margin折叠"><a href="#margin折叠" class="headerlink" title="margin折叠"></a>margin折叠</h3><p>margin折叠是指毗邻的两个或多个margin会合并为一个margin  </p>
+<p>规则：</p>
+<ul>
+<li>普通流的块元素垂直方向上会折叠</li>
+<li>浮动元素或者inline-block或绝对定位的元素不会和垂直方向上的其他元素margin折叠</li>
+<li>创建了块级格式化上下文元素，不会和子元素发生margin折叠</li>
+<li>元素自身的margin-bottom和margin-bottom相邻也会折叠</li>
+</ul>
+<p>计算规则：</p>
+<ul>
+<li>正正取大值</li>
+<li>正负相加</li>
+<li>负负取绝对值较大值</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/meta/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1163,7 +1512,7 @@ F --> A[分词索引和统计词频];</pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1185,7 +1534,7 @@ F --> A[分词索引和统计词频];</pre>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
