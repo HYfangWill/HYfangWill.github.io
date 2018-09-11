@@ -249,6 +249,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/11/copy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfangwill">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hyfang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/11/copy/" itemprop="url">浅拷贝与深拷贝</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-11T15:19:38+08:00">
+                2018-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>深浅拷贝是针对Object和Array的复杂类型，因为JS存储对象或者数组都是存地址，与基本类型有差异<br>以下用srcObj表示原对象或数组，newObj表示拷贝的对象或数组</p>
+<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>浅拷贝是对对象地址的复制，srcObj和newObj指向同一块内存，修改其中任意的值，另一个值都会随之变化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function shadowCopy(srcObj)&#123;</span><br><span class="line">    var newObj= &#123;&#125;;</span><br><span class="line">    for(var prop in srcObj)&#123;</span><br><span class="line">        newObj[prop] = srcObj[prop];</span><br><span class="line">    &#125;</span><br><span class="line">    return newObj;</span><br><span class="line">&#125;</span><br><span class="line">var srcObj = &#123;a: 1, arr: [[1, 2], 3]&#125;;</span><br><span class="line">var newObj = shadowCopy(srcObj);</span><br><span class="line">newObj.arr[0] = 0;</span><br><span class="line">console.log(srcObj);</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure></p>
+<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p>newObj开辟了新的内存，srcObj的各个属性都复制到新的内存里，srcObj和newObj互不影响</p>
+<ul>
+<li>JS递归方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function deepcopy(srcObj, newObj)&#123;</span><br><span class="line">	var newObj = newObj || &#123;&#125;;</span><br><span class="line">	for(var prop in srcObj)&#123;</span><br><span class="line">		if(typeof srcObj[prop] === &apos;object&apos;)&#123;</span><br><span class="line">			if(srcObj[prop].constructor === Array)&#123;</span><br><span class="line">				newObj[prop] = [];</span><br><span class="line">			&#125;</span><br><span class="line">			else&#123;</span><br><span class="line">				newObj[prop] = &#123;&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			deepcopy(srcObj[prop], newObj[prop]);</span><br><span class="line">		&#125;</span><br><span class="line">		else&#123;</span><br><span class="line">			newObj[prop] = srcObj[prop];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var srcObj = &#123;a: 1, arr: [[1, 2], 3]&#125;;</span><br><span class="line">var newObj = &#123;&#125;;</span><br><span class="line">deepcopy(srcObj, newObj);</span><br><span class="line">console.log(srcObj);</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>JSON方法：如果对象存在函数，不能被拷贝；不能拷贝原对象原型链上的方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var srcObj = &#123;a: 1, arr: [[1, 2], 3]&#125;;</span><br><span class="line">var newObj = JSON.parse(JSON.stringify(srcObj));</span><br><span class="line">newObj.arr[0]=0;</span><br><span class="line">console.log(srcObj);</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>JQuery方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var newObj1 = $.extend(true, &#123;&#125;, srcObj); // 深拷贝</span><br><span class="line">var newObj2 = $.extend(false, &#123;&#125;, srcObj); // 浅拷贝</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/promise/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1512,7 +1667,7 @@ F --> A[分词索引和统计词频];</pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
