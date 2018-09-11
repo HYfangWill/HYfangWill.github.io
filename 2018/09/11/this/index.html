@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="回调函数JS的所有代码都是单线程执行的这个单线程的缺陷，导致JavaScript的所有网络操作、浏览器时间，都必须异步执行，异步执行可以用回调函数实现123456function callback()&amp;#123;    console.log(&amp;quot;working&amp;quot;);&amp;#125;console.log(&amp;quot;before work&amp;quot;);setTimeout(cal">
+<meta name="description" content="this使用this是函数运行时所在的环境对象  纯粹函数调用全局调用时，this为全局对象，而在严格模式下，this会变成undefined 12345var a = 1;function test()&amp;#123;    console.log(this.a);&amp;#125;test(); // 1  作为对象方法调用this指向这个调用者 123456function test()&amp;#123;">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Promise">
-<meta property="og:url" content="https://hyfangwill.github.io/2018/09/10/promise/index.html">
+<meta property="og:title" content="this">
+<meta property="og:url" content="https://hyfangwill.github.io/2018/09/11/this/index.html">
 <meta property="og:site_name" content="hyfang&#39;s blog">
-<meta property="og:description" content="回调函数JS的所有代码都是单线程执行的这个单线程的缺陷，导致JavaScript的所有网络操作、浏览器时间，都必须异步执行，异步执行可以用回调函数实现123456function callback()&amp;#123;    console.log(&amp;quot;working&amp;quot;);&amp;#125;console.log(&amp;quot;before work&amp;quot;);setTimeout(cal">
+<meta property="og:description" content="this使用this是函数运行时所在的环境对象  纯粹函数调用全局调用时，this为全局对象，而在严格模式下，this会变成undefined 12345var a = 1;function test()&amp;#123;    console.log(this.a);&amp;#125;test(); // 1  作为对象方法调用this指向这个调用者 123456function test()&amp;#123;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-10T14:50:26.917Z">
+<meta property="og:updated_time" content="2018-09-11T12:51:31.061Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Promise">
-<meta name="twitter:description" content="回调函数JS的所有代码都是单线程执行的这个单线程的缺陷，导致JavaScript的所有网络操作、浏览器时间，都必须异步执行，异步执行可以用回调函数实现123456function callback()&amp;#123;    console.log(&amp;quot;working&amp;quot;);&amp;#125;console.log(&amp;quot;before work&amp;quot;);setTimeout(cal">
+<meta name="twitter:title" content="this">
+<meta name="twitter:description" content="this使用this是函数运行时所在的环境对象  纯粹函数调用全局调用时，this为全局对象，而在严格模式下，this会变成undefined 12345var a = 1;function test()&amp;#123;    console.log(this.a);&amp;#125;test(); // 1  作为对象方法调用this指向这个调用者 123456function test()&amp;#123;">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/10/promise/"/>
+  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/11/this/"/>
 
 
 
 
 
-  <title>Promise | hyfang's blog</title>
+  <title>this | hyfang's blog</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/promise/">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/11/this/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hyfangwill">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Promise</h1>
+          <h1 class="post-title" itemprop="name headline">this</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T22:47:43+08:00">
-                2018-09-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-11T20:47:46+08:00">
+                2018-09-11
               </time>
             
 
@@ -342,27 +342,27 @@
       
 
       
-        <h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>JS的所有代码都是单线程执行的<br>这个单线程的缺陷，导致JavaScript的所有网络操作、浏览器时间，都必须异步执行，异步执行可以用回调函数实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function callback()&#123;</span><br><span class="line">    console.log(&quot;working&quot;);</span><br><span class="line">&#125;</span><br><span class="line">console.log(&quot;before work&quot;);</span><br><span class="line">setTimeout(callback, 1000);//1秒钟后调用callback</span><br><span class="line">console.log(&quot;after work&quot;);</span><br></pre></td></tr></table></figure></p>
-<p>输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">before work</span><br><span class="line">after work</span><br><span class="line">// 等待1秒或1秒左右后</span><br><span class="line">working</span><br></pre></td></tr></table></figure></p>
-<p>可见，异步操作将会在将来的某个时间点触发函数调用</p>
-<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><p>AJAX是典型的异步操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">request.onreadystatechange = function()&#123;</span><br><span class="line">    if(request.readyState === 4)&#123;</span><br><span class="line">        if(request.status === 200)&#123;</span><br><span class="line">            return success(request.responseText);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return fail(request.status);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>将以上改为链式写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ajax = ajaxGet(url);</span><br><span class="line">ajax.ifSuccess(success).ifFail(fail);</span><br></pre></td></tr></table></figure></p>
-<p>链式写法的好处在于，先统一执行AJAX逻辑，不关心处理结果，根据结果成功或者失败，在将来的某个时候调用success函数或者fail函数，<strong>这种“承诺将来会执行”的对象称为Promise对象</strong></p>
-<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><p>非Promise的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function test(resolve, reject)&#123;</span><br><span class="line">    var timeOut = Math.random() * 2;</span><br><span class="line">    log(&quot;set time to:&quot;+timeOut+&quot; seconds&quot;);</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">        if(timeOut&lt;1)&#123;</span><br><span class="line">            log(&quot;call resolve()...&quot;);</span><br><span class="line">            resolve(&quot;200 OK&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            log(&quot;call reject()...&quot;);</span><br><span class="line">            reject(&quot;timeout in &quot;+timeOut+&quot; seconds&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, timeOut * 1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>test()函数接受2个参数，这2个参数都是函数，test执行后，一种条件下执行resolve，另一种执行reject，不需要关心具体处理方式<br>Promise例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var p1 = new Promise(test);</span><br><span class="line">var p2 = p1.then(function(result)&#123;</span><br><span class="line">    console.log(&quot;成功：&quot;+result);</span><br><span class="line">&#125;);</span><br><span class="line">var p3 = p2.catch(function(reason)&#123;</span><br><span class="line">    console.log(&quot;失败：&quot;+reason);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>简化写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new Promise(test).then(function(result)&#123;</span><br><span class="line">    console.log(&quot;成功：&quot;+result);</span><br><span class="line">&#125;).catch(function(reason)&#123;</span><br><span class="line">    console.log(&quot;失败：&quot;+reason);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>Promise可以将执行代码和处理结果的代码清晰分离，先执test()函数，根据情况执行then或catch，其中用于执行then和catch的函数function(result)和function(reason)执行，会自动与resolve和reject关联<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[new Promise] --&gt; B[执行函数]</span><br><span class="line">B --&gt;|then| C[on_resolve]</span><br><span class="line">B --&gt;|catch| D[on_reject]</span><br></pre></td></tr></table></figure></p>
-<h3 id="多异步任务"><a href="#多异步任务" class="headerlink" title="多异步任务"></a>多异步任务</h3><p>p1、p2、p3都是Promise对象</p>
+        <h2 id="this使用"><a href="#this使用" class="headerlink" title="this使用"></a>this使用</h2><p>this是函数运行时所在的环境对象</p>
 <ul>
-<li><p>串行执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p1.then(p2).then(p3).catch(handlerError);</span><br></pre></td></tr></table></figure>
+<li><p>纯粹函数调用<br>全局调用时，this为全局对象，而在严格模式下，this会变成undefined</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">function test()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">test(); // 1</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>并行执行等待所有结果返回后再执行then</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Promise.all([p1, p2]).then(function(results)&#123;</span><br><span class="line">    // results是p1,p2的执行结果的数组</span><br><span class="line">    console.log(results);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<li><p>作为对象方法调用<br>this指向这个调用者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123;a: 1&#125;;</span><br><span class="line">obj.test = test;</span><br><span class="line">obj.test(); // 1</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>并行执行只需要最先返回的一个结果返回就可以执行then</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Promise.race([p1, p2]).then(function(result)&#123;</span><br><span class="line">    console.log(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>作为构造函数调用<br>使用new关键字时，将实例化一个类，原理是调用类的构造函数，将this绑定到新的对象上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">function Person()&#123;</span><br><span class="line">    this.a = 2;</span><br><span class="line">&#125;</span><br><span class="line">var obj = new Person();</span><br><span class="line">console.log(obj.a); // 2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>apply、call调用<br>apply/call接受的第一个参数为对象，this将指向这个对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var obj = &#123;a: 2&#125;;</span><br><span class="line">function test()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">test.apply(obj); // 2</span><br><span class="line">test.apply(); // 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bind调用<br>bind的第一个参数也是对象，this将指向这个对象，与apply/call不同的是，bind绑定时不会执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var obj = &#123;</span><br><span class="line">	a: 2</span><br><span class="line">&#125;</span><br><span class="line">function test()&#123;</span><br><span class="line">	console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var func = test.bind(obj);</span><br><span class="line">func(); // 2</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<h2 id="this的特殊情况"><a href="#this的特殊情况" class="headerlink" title="this的特殊情况"></a>this的特殊情况</h2><h3 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h3><p>setTimeout的默认定义域是全局的，执行setTimeout的this对象就是window，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var obj = &#123;</span><br><span class="line">	a: 2,</span><br><span class="line">	showName: function()&#123;</span><br><span class="line">		console.log(&quot;showName: &quot;+this.a);</span><br><span class="line">	&#125;,</span><br><span class="line">	waitShowName: function()&#123;</span><br><span class="line">		setTimeout(function()&#123;</span><br><span class="line">			console.log(&quot;waitShowName: &quot;+this.a);</span><br><span class="line">		&#125;, 1000);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.waitShowName(); // 1</span><br><span class="line">obj.showName(); // 2</span><br></pre></td></tr></table></figure></p>
+<p>如果需要改变getTimeout的对象，需要用到hack写法：==var that = this==：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">waitShowName: function()&#123;</span><br><span class="line">	var that = this;</span><br><span class="line">	setTimeout(function()&#123;</span><br><span class="line">		console.log(&quot;waitShowName: &quot;+that.a); // 2</span><br><span class="line">	&#125;, 1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>箭头函数的this总是指向词法作用域，即最外层的调用者，不会因为调用环境改变，同时，也不会被call/apply/bind改变this</p>
 
       
     </div>
@@ -393,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/10/box-model/" rel="next" title="CSS盒模型">
-                <i class="fa fa-chevron-left"></i> CSS盒模型
+              <a href="/2018/09/11/copy/" rel="next" title="浅拷贝与深拷贝">
+                <i class="fa fa-chevron-left"></i> 浅拷贝与深拷贝
               </a>
             
           </div>
@@ -402,10 +402,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/11/copy/" rel="prev" title="浅拷贝与深拷贝">
-                浅拷贝与深拷贝 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -553,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数"><span class="nav-number">1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AJAX"><span class="nav-number">2.</span> <span class="nav-text">AJAX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">3.</span> <span class="nav-text">Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单使用"><span class="nav-number">3.1.</span> <span class="nav-text">简单使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多异步任务"><span class="nav-number">3.2.</span> <span class="nav-text">多异步任务</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#this使用"><span class="nav-number">1.</span> <span class="nav-text">this使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this的特殊情况"><span class="nav-number">2.</span> <span class="nav-text">this的特殊情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout"><span class="nav-number">2.1.</span> <span class="nav-text">setTimeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数"><span class="nav-number">2.2.</span> <span class="nav-text">箭头函数</span></a></li></ol></li></ol></div>
             
 
           </div>
