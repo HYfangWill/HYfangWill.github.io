@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="meta," />
+  <meta name="keywords" content="排序," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="搜索引擎优化，全称Search Engine Optimization，它帮助网站更加符合搜索引擎抓取和用户喜好，提升搜索结果排序名次  原理 搜索引擎蜘蛛采用深度优先+宽度优先+权重优先+重访抓取的策略，发现一个链接，下载该网页后，加入临时库，提取网页链接，再提取网页中的链接，依次循环。  graph LR; A[发现链接] --&amp;gt; B[下载网页]; B --&amp;gt; C[加入临时库]; C --&amp;gt;">
-<meta name="keywords" content="meta">
+<meta name="description" content="快速排序思路&amp;emsp;&amp;emsp;采用分治法，依次对序列中的数据进行处理，确定当前数据的最终位置，且左边的数据都比当前数据小，右边的数据都比当前数据大，再对左边序列、右边序列进行排序。&amp;emsp;&amp;emsp;快速排序的单次排序处理，通过以下实例来说明。 实例对以下数组进行排序    0 1 2 3 4 5 6     56 94 2 19 7 18 28      把数组的第一个数据56保存到一">
+<meta name="keywords" content="排序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SEO">
-<meta property="og:url" content="https://hyfangwill.github.io/2018/09/09/seo/index.html">
+<meta property="og:title" content="quick-sort">
+<meta property="og:url" content="https://hyfangwill.github.io/2018/09/16/quick-sort/index.html">
 <meta property="og:site_name" content="hyfang&#39;s blog">
-<meta property="og:description" content="搜索引擎优化，全称Search Engine Optimization，它帮助网站更加符合搜索引擎抓取和用户喜好，提升搜索结果排序名次  原理 搜索引擎蜘蛛采用深度优先+宽度优先+权重优先+重访抓取的策略，发现一个链接，下载该网页后，加入临时库，提取网页链接，再提取网页中的链接，依次循环。  graph LR; A[发现链接] --&amp;gt; B[下载网页]; B --&amp;gt; C[加入临时库]; C --&amp;gt;">
+<meta property="og:description" content="快速排序思路&amp;emsp;&amp;emsp;采用分治法，依次对序列中的数据进行处理，确定当前数据的最终位置，且左边的数据都比当前数据小，右边的数据都比当前数据大，再对左边序列、右边序列进行排序。&amp;emsp;&amp;emsp;快速排序的单次排序处理，通过以下实例来说明。 实例对以下数组进行排序    0 1 2 3 4 5 6     56 94 2 19 7 18 28      把数组的第一个数据56保存到一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-16T14:31:00.631Z">
+<meta property="og:updated_time" content="2018-09-16T14:58:00.241Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SEO">
-<meta name="twitter:description" content="搜索引擎优化，全称Search Engine Optimization，它帮助网站更加符合搜索引擎抓取和用户喜好，提升搜索结果排序名次  原理 搜索引擎蜘蛛采用深度优先+宽度优先+权重优先+重访抓取的策略，发现一个链接，下载该网页后，加入临时库，提取网页链接，再提取网页中的链接，依次循环。  graph LR; A[发现链接] --&amp;gt; B[下载网页]; B --&amp;gt; C[加入临时库]; C --&amp;gt;">
+<meta name="twitter:title" content="quick-sort">
+<meta name="twitter:description" content="快速排序思路&amp;emsp;&amp;emsp;采用分治法，依次对序列中的数据进行处理，确定当前数据的最终位置，且左边的数据都比当前数据小，右边的数据都比当前数据大，再对左边序列、右边序列进行排序。&amp;emsp;&amp;emsp;快速排序的单次排序处理，通过以下实例来说明。 实例对以下数组进行排序    0 1 2 3 4 5 6     56 94 2 19 7 18 28      把数组的第一个数据56保存到一">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/09/seo/"/>
+  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/16/quick-sort/"/>
 
 
 
 
 
-  <title>SEO | hyfang's blog</title>
+  <title>quick-sort | hyfang's blog</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/09/seo/">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/16/quick-sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hyfangwill">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SEO</h1>
+          <h1 class="post-title" itemprop="name headline">quick-sort</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T12:01:23+08:00">
-                2018-09-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T22:28:05+08:00">
+                2018-09-16
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -342,40 +342,96 @@
       
 
       
-        <p>搜索引擎优化，全称Search Engine Optimization，它帮助网站更加符合搜索引擎抓取和用户喜好，提升搜索结果排序名次 </p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
-<li><strong>搜索引擎蜘蛛</strong>采用深度优先+宽度优先+权重优先+重访抓取的策略，发现一个链接，下载该网页后，加入临时库，提取网页链接，再提取网页中的链接，依次循环。  <pre class="mermaid">graph LR;
-A[发现链接] --> B[下载网页];
-B --> C[加入临时库];
-C --> A;</pre></li>
-<li><strong>数据分析系统</strong>获取网页后，删除html代码提取内容，留下网页主题，删除重复网页和内容，正文内容分词并排列，存入索引库和统计词频<pre class="mermaid">graph LR;
-D[删除html代码] --> E[提取内容主题];
-E --> F[去重];
-F --> A[分词索引和统计词频];</pre>
-
+        <h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>&emsp;&emsp;采用分治法，依次对序列中的数据进行处理，确定当前数据的最终位置，且左边的数据都比当前数据小，右边的数据都比当前数据大，再对左边序列、右边序列进行排序。<br>&emsp;&emsp;快速排序的单次排序处理，通过以下实例来说明。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>对以下数组进行排序</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">56</td>
+<td style="text-align:center">94</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">28 </td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>把数组的第一个数据<code>56</code>保存到一个临时变量中</li>
+<li>从数组的右边开始向左和<code>56</code>比较，第一个小于<code>56</code>的数为<code>18</code>，记录其位置<code>5</code></li>
+<li>从数组的左边开始向右和<code>56</code>比较，第一个大于<code>56</code>的数为<code>94</code>，记录其位置<code>1</code>，由于离<code>5</code>位置较远，暂不用考虑</li>
+<li>交换位置<code>1</code>和位置<code>5</code>数据</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">56</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">94</td>
+<td style="text-align:center">28 </td>
+</tr>
+</tbody>
+</table>
+<ol start="5">
+<li>再从位置<code>5</code>开始向左和<code>56</code>比较，记录又一个较小数<code>7</code>的位置位置<code>4</code>，<code>1</code>开始向右和<code>56</code>比较，比较到位置<code>4</code>时，已经“碰到”了从右边遍历到的位置<code>4</code></li>
+<li>暂时结束向左和向右的比较，交换<code>56</code>和位置<code>4</code>的数据</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">56</td>
+<td style="text-align:center">94</td>
+<td style="text-align:center">28 </td>
+</tr>
+</tbody>
+</table>
+<ol start="7">
+<li>这里可以发现<code>56</code>已经找到了它的最终位置，之后再对<code>56</code>左边、右边的数组排序，直到每个处理的子数组长度为1或为0，就可以得到最后结果<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 时间复杂度 O(nlogn)</span><br><span class="line"> * 空间复杂度 O(n)</span><br><span class="line"> */</span><br><span class="line">int partition(int *a, int left, int right) &#123;</span><br><span class="line">	int i = left;</span><br><span class="line">	int j = right + 1;</span><br><span class="line">	int v = a[left];</span><br><span class="line">	while (true) &#123;</span><br><span class="line">		while (a[--j] &gt; v);</span><br><span class="line">		while (i &lt; j &amp;&amp; a[++i] &lt; v);</span><br><span class="line">		if (i == j) &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		int temp = a[i];</span><br><span class="line">		a[i] = a[j];</span><br><span class="line">		a[j] = temp;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	a[left] = a[i];</span><br><span class="line">	a[i] = v;</span><br><span class="line">	return i;</span><br><span class="line">&#125;</span><br><span class="line">void quick_sort(int *a, int left, int right)&#123;</span><br><span class="line">	if (left &lt; right) &#123;</span><br><span class="line">		int middle = partition(a, left, right);</span><br><span class="line">		quick_sort(a, left, middle - 1);</span><br><span class="line">		quick_sort(a, middle + 1, right);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<h2 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h2><ul>
-<li>meta  <ul>
-<li>title网页主题、description网页描述、keywords关键词精确</li>
-</ul>
-</li>
-<li>html、css、js  <ul>
-<li>html与css、js结构分离，重要内容优先加载、扁平化层级</li>
-</ul>
-</li>
-<li>标签<ul>
-<li>&lt;h1>的权重仅次于&lt;title>，内容精确，善用&lt;h2>&lt;em>&lt;strong>等标签</li>
-<li>&lt;img>图片设置好title或者alt属性</li>
-<li>&lt;a>标签设置好title、nofollow属性、锚文本</li>
-</ul>
-</li>
-<li>内容<ul>
-<li>第一个出现关键词最好加粗</li>
-<li>关键词频率合理增加</li>
-<li>增加友情链接、RSS订阅、站点订阅、404页面、长尾关键词</li>
-</ul>
-</li>
+</ol>
+<h2 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h2><ul>
+<li>由于快速排序需要多次直接访问指定位置的数据，因此使用顺序数组比链表合适</li>
 </ul>
 
       
@@ -394,7 +450,7 @@ F --> A[分词索引和统计词频];</pre>
       
         <div class="post-tags">
           
-            <a href="/tags/meta/" rel="tag"># meta</a>
+            <a href="/tags/排序/" rel="tag"># 排序</a>
           
         </div>
       
@@ -407,8 +463,8 @@ F --> A[分词索引和统计词频];</pre>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/09/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/09/16/link-import/" rel="next" title="link和@import">
+                <i class="fa fa-chevron-left"></i> link和@import
               </a>
             
           </div>
@@ -416,10 +472,6 @@ F --> A[分词索引和统计词频];</pre>
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/10/visit-website/" rel="prev" title="浏览器访问网页">
-                浏览器访问网页 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -567,7 +619,7 @@ F --> A[分词索引和统计词频];</pre>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端优化"><span class="nav-number">2.</span> <span class="nav-text">前端优化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快速排序"><span class="nav-number">1.</span> <span class="nav-text">快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">1.2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">1.3.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评价"><span class="nav-number">1.4.</span> <span class="nav-text">评价</span></a></li></ol></li></ol></div>
             
 
           </div>

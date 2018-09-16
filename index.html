@@ -249,6 +249,238 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/16/quick-sort/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfangwill">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hyfang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/16/quick-sort/" itemprop="url">quick-sort</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T22:28:05+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>&emsp;&emsp;采用分治法，依次对序列中的数据进行处理，确定当前数据的最终位置，且左边的数据都比当前数据小，右边的数据都比当前数据大，再对左边序列、右边序列进行排序。<br>&emsp;&emsp;快速排序的单次排序处理，通过以下实例来说明。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>对以下数组进行排序</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">56</td>
+<td style="text-align:center">94</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">28 </td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>把数组的第一个数据<code>56</code>保存到一个临时变量中</li>
+<li>从数组的右边开始向左和<code>56</code>比较，第一个小于<code>56</code>的数为<code>18</code>，记录其位置<code>5</code></li>
+<li>从数组的左边开始向右和<code>56</code>比较，第一个大于<code>56</code>的数为<code>94</code>，记录其位置<code>1</code>，由于离<code>5</code>位置较远，暂不用考虑</li>
+<li>交换位置<code>1</code>和位置<code>5</code>数据</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">56</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">94</td>
+<td style="text-align:center">28 </td>
+</tr>
+</tbody>
+</table>
+<ol start="5">
+<li>再从位置<code>5</code>开始向左和<code>56</code>比较，记录又一个较小数<code>7</code>的位置位置<code>4</code>，<code>1</code>开始向右和<code>56</code>比较，比较到位置<code>4</code>时，已经“碰到”了从右边遍历到的位置<code>4</code></li>
+<li>暂时结束向左和向右的比较，交换<code>56</code>和位置<code>4</code>的数据</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">56</td>
+<td style="text-align:center">94</td>
+<td style="text-align:center">28 </td>
+</tr>
+</tbody>
+</table>
+<ol start="7">
+<li>这里可以发现<code>56</code>已经找到了它的最终位置，之后再对<code>56</code>左边、右边的数组排序，直到每个处理的子数组长度为1或为0，就可以得到最后结果<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 时间复杂度 O(nlogn)</span><br><span class="line"> * 空间复杂度 O(n)</span><br><span class="line"> */</span><br><span class="line">int partition(int *a, int left, int right) &#123;</span><br><span class="line">	int i = left;</span><br><span class="line">	int j = right + 1;</span><br><span class="line">	int v = a[left];</span><br><span class="line">	while (true) &#123;</span><br><span class="line">		while (a[--j] &gt; v);</span><br><span class="line">		while (i &lt; j &amp;&amp; a[++i] &lt; v);</span><br><span class="line">		if (i == j) &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		int temp = a[i];</span><br><span class="line">		a[i] = a[j];</span><br><span class="line">		a[j] = temp;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	a[left] = a[i];</span><br><span class="line">	a[i] = v;</span><br><span class="line">	return i;</span><br><span class="line">&#125;</span><br><span class="line">void quick_sort(int *a, int left, int right)&#123;</span><br><span class="line">	if (left &lt; right) &#123;</span><br><span class="line">		int middle = partition(a, left, right);</span><br><span class="line">		quick_sort(a, left, middle - 1);</span><br><span class="line">		quick_sort(a, middle + 1, right);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h2><ul>
+<li>由于快速排序需要多次直接访问指定位置的数据，因此使用顺序数组比链表合适</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/16/link-import/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -303,8 +535,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/front-end/" itemprop="url" rel="index">
-                    <span itemprop="name">front-end</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -479,8 +711,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/front-end/" itemprop="url" rel="index">
-                    <span itemprop="name">front-end</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -640,8 +872,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/front-end/" itemprop="url" rel="index">
-                    <span itemprop="name">front-end</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -799,8 +1031,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/front-end/" itemprop="url" rel="index">
-                    <span itemprop="name">front-end</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -1119,8 +1351,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/front-end/" itemprop="url" rel="index">
-                    <span itemprop="name">front-end</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -1281,8 +1513,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/front-end/" itemprop="url" rel="index">
-                    <span itemprop="name">front-end</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -1468,8 +1700,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/front-end/" itemprop="url" rel="index">
-                    <span itemprop="name">front-end</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -1676,8 +1908,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/front-end/" itemprop="url" rel="index">
-                    <span itemprop="name">front-end</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -1788,196 +2020,6 @@ D --> |更新视图| F</pre>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/visit-website/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hyfangwill">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="hyfang's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/10/visit-website/" itemprop="url">浏览器访问网页</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T14:18:47+08:00">
-                2018-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/front-end/" itemprop="url" rel="index">
-                    <span itemprop="name">front-end</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>从输入地址到页面显示的流程</p>
-<pre class="mermaid">graph LR
-A[输入URL] --> B[DNS解析URL]
-B --> C[TCP连接]
-C --> D[浏览器发送请求]
-D --> E[服务器响应]
-E --> F[关闭连接]
-G[浏览器下载文件] --> H[浏览器解析文件]
-H --> I[浏览器布局渲染]</pre>
-
-<ol>
-<li>输入URL</li>
-<li>DNS解析URL地址中的域名返回IP<ol>
-<li>浏览器首先先询问本地hosts文件，检查域名是否有对应的IP</li>
-<li>如果没有对应IP，<strong>递归查询</strong>本地DNS服务器，DNS服务器<strong>迭代查询</strong>根、com、www.blog.com的DNS服务器，获得最终的IP</li>
-</ol>
-</li>
-<li>建立TCP连接<br>即经典的TCP三次挥手<ol>
-<li>客户端请求连接(SYN数据包)</li>
-<li>服务器确认信息(SYN/ACK数据包)</li>
-<li>客户端确认应答(ACK数据包)</li>
-</ol>
-</li>
-<li>浏览器发送http请求<br>http请求内容：<ul>
-<li>报文首部：请求行(URI/HTTP版本/请求方法)、请求首部字段(传递重要信息)、通用首部字段、实体首部字段、其他</li>
-<li>空行：表示头部结束，不可省略</li>
-<li>报文主体</li>
-</ul>
-</li>
-<li>服务器处理并响应<br>响应请求<ul>
-<li>报文首部：状态行(状态码和信息)、响应首部字段、通用首部字段、实体首部字段、其他</li>
-<li>空行：表示头部结束，不可省略</li>
-<li>报文主体</li>
-</ul>
-</li>
-<li>关闭连接<br>TCP四次挥手<ol>
-<li>客户端请求关闭FIN</li>
-<li>服务器确认请求关闭ACK</li>
-<li>服务器请求关闭FIN</li>
-<li>客户端确认请求关闭ACK</li>
-</ol>
-</li>
-<li>浏览器解析HTML  <ol>
-<li>浏览器加载HTML、CSS、JS、图片、视频等</li>
-<li>浏览器解析HTML生成DOM树，解析CSS生成CSS规则树，两者生成渲染树（渲染树与DOM树区别是，渲染里没有head和display为none的节点）</li>
-</ol>
-</li>
-<li>浏览器布局渲染<br>根据渲染树布局，计算CSS样式，显示页面，可能引起重绘和重排，其中重绘是屏幕的一部分重画，不影响整体布局，如改个颜色，重排需要重新计算DOM树，显示最后页面</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2028,7 +2070,7 @@ H --> I[浏览器布局渲染]</pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2039,7 +2081,7 @@ H --> I[浏览器布局渲染]</pre>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2050,7 +2092,7 @@ H --> I[浏览器布局渲染]</pre>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
