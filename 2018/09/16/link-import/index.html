@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="CSS,HTML," />
+  <meta name="keywords" content="CSS,HTML,JavaScript," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="IE盒模型和W3C盒模型的区别 width和heightIE盒模型content+padding+border，W3C盒模型content  使用设置盒模型 box-sizing可以改变浏览器默认的盒模型 content-box：W3C盒模型 padding-box：content+padding==width border-box：IE盒模型    对行内元素的设置 width/height无">
-<meta name="keywords" content="CSS,HTML">
+<meta name="description" content="link和@import都是引入CSS的方式 CSS和HTML文档结合的方式 使用元素链接到外部的样式文件 &amp;lt;head&amp;gt;内使用&amp;lt;style&amp;gt; @import &amp;lt;body&amp;gt;标签里，使用style属性 link1&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot; href=&amp;quot;style.css&amp;quot">
+<meta name="keywords" content="CSS,HTML,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSS盒模型">
-<meta property="og:url" content="https://hyfangwill.github.io/2018/09/10/box-model/index.html">
+<meta property="og:title" content="link和@import">
+<meta property="og:url" content="https://hyfangwill.github.io/2018/09/16/link-import/index.html">
 <meta property="og:site_name" content="hyfang&#39;s blog">
-<meta property="og:description" content="IE盒模型和W3C盒模型的区别 width和heightIE盒模型content+padding+border，W3C盒模型content  使用设置盒模型 box-sizing可以改变浏览器默认的盒模型 content-box：W3C盒模型 padding-box：content+padding==width border-box：IE盒模型    对行内元素的设置 width/height无">
+<meta property="og:description" content="link和@import都是引入CSS的方式 CSS和HTML文档结合的方式 使用元素链接到外部的样式文件 &amp;lt;head&amp;gt;内使用&amp;lt;style&amp;gt; @import &amp;lt;body&amp;gt;标签里，使用style属性 link1&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot; href=&amp;quot;style.css&amp;quot">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://hyfangwill.github.io/images/box-model.png">
-<meta property="og:updated_time" content="2018-09-10T14:50:26.956Z">
+<meta property="og:updated_time" content="2018-09-16T12:55:19.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CSS盒模型">
-<meta name="twitter:description" content="IE盒模型和W3C盒模型的区别 width和heightIE盒模型content+padding+border，W3C盒模型content  使用设置盒模型 box-sizing可以改变浏览器默认的盒模型 content-box：W3C盒模型 padding-box：content+padding==width border-box：IE盒模型    对行内元素的设置 width/height无">
-<meta name="twitter:image" content="https://hyfangwill.github.io/images/box-model.png">
+<meta name="twitter:title" content="link和@import">
+<meta name="twitter:description" content="link和@import都是引入CSS的方式 CSS和HTML文档结合的方式 使用元素链接到外部的样式文件 &amp;lt;head&amp;gt;内使用&amp;lt;style&amp;gt; @import &amp;lt;body&amp;gt;标签里，使用style属性 link1&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot; href=&amp;quot;style.css&amp;quot">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/10/box-model/"/>
+  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/16/link-import/"/>
 
 
 
 
 
-  <title>CSS盒模型 | hyfang's blog</title>
+  <title>link和@import | hyfang's blog</title>
   
 
 
@@ -255,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/box-model/">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/16/link-import/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hyfangwill">
@@ -272,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CSS盒模型</h1>
+          <h1 class="post-title" itemprop="name headline">link和@import</h1>
         
 
         <div class="post-meta">
@@ -284,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T22:33:41+08:00">
-                2018-09-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T20:47:42+08:00">
+                2018-09-16
               </time>
             
 
@@ -344,52 +342,41 @@
       
 
       
-        <p><img src="/images/box-model.png" alt="盒模型"></p>
-<h2 id="IE盒模型和W3C盒模型的区别"><a href="#IE盒模型和W3C盒模型的区别" class="headerlink" title="IE盒模型和W3C盒模型的区别"></a>IE盒模型和W3C盒模型的区别</h2><ul>
-<li>width和height<br>IE盒模型content+padding+border，W3C盒模型content</li>
-</ul>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="设置盒模型"><a href="#设置盒模型" class="headerlink" title="设置盒模型"></a>设置盒模型</h3><ul>
-<li>box-sizing可以改变浏览器默认的盒模型<ul>
-<li>content-box：W3C盒模型</li>
-<li>padding-box：content+padding==width</li>
-<li>border-box：IE盒模型</li>
-</ul>
+        <p>link和@import都是引入CSS的方式</p>
+<h2 id="CSS和HTML文档结合的方式"><a href="#CSS和HTML文档结合的方式" class="headerlink" title="CSS和HTML文档结合的方式"></a>CSS和HTML文档结合的方式</h2><ul>
+<li>使用<link>元素链接到外部的样式文件</li>
+<li><code>&lt;head></code>内使用<code>&lt;style></code></li>
+<li><code>@import</code></li>
+<li><p><code>&lt;body></code>标签里，使用style属性</p>
+<h3 id="link"><a href="#link" class="headerlink" title="link"></a>link</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;style.css&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>charset/rev/target   分别是编码/链接文档与当前文档关系/目标页面，HTML5不支持，target属性值是_blank/_self/_top/_parent/frame_name</p>
+</li>
+<li>href<br>存放链接文件路径</li>
+<li>hreflang<br>链接文件语言</li>
+<li>media<br>显示设备，如screen屏幕、print打印、all所有</li>
+<li>rel<br>当前文档与链接文档的关系，如alternate文档替代版本、author、help帮助文档、icon图标文件、license许可文件、next集合下一个文档、pingback、prefetch、prev集合上一个文档、search搜索文档、sidebar导航文档、stylesheet外部样式表、tag、index索引文档、contents文档目录、bookmark相关文档、chapter文档的章、section文档的节、subseciton文档的小节、appendix文档附录</li>
+<li>sizes：资源尺寸，只适用于icon资源，属性值为<code>heightxwidth|any</code>，height和width用<code>x</code>和<code>X</code>，any规定图标是可伸缩的</li>
+<li>type<br>链接文档的MIME类型<h3 id="import"><a href="#import" class="headerlink" title="@import"></a>@import</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    @import url(style.css)</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="对行内元素的设置"><a href="#对行内元素的设置" class="headerlink" title="对行内元素的设置"></a>对行内元素的设置</h3><ul>
-<li>width/height无效</li>
-<li>padding-top/padding-bottom/margin-top/margin-bottom无效</li>
-<li>padding-left/padding-right/margin-left/margin-right有效</li>
-<li>line-height有效</li>
+<h2 id="link和-import的区别"><a href="#link和-import的区别" class="headerlink" title="link和@import的区别"></a>link和@import的区别</h2><ul>
+<li><p>link标签<br>HTML和XHTML都有，使网页作者可以增加HTML文档相关的额外信息，额外资源可以引入样式CSS、导航助手、属于另外形式的信息RSS、联系信息等</p>
+</li>
+<li><p>@import<br>指定导入的外部样式表及目标设备类型  </p>
+</li>
 </ul>
-<h3 id="margin-auto的使用"><a href="#margin-auto的使用" class="headerlink" title="margin: auto的使用"></a>margin: auto的使用</h3><ul>
-<li>元素没有设置width和height，会自动填充容器</li>
-<li>元素设置了width或height（有效情况下），自动填充会被覆盖，margin为0，因此如果margin设置为auto，可以填充空白，使得元素水平居中</li>
-</ul>
-<h3 id="百分比的使用"><a href="#百分比的使用" class="headerlink" title="百分比的使用"></a>百分比的使用</h3><p>百分比是相对父元素而言的，这个父元素分为两种：</p>
+<p>区别在于：</p>
 <ol>
-<li>如果该元素position没有定位成relative或者absolute，父元素是已经定位的父元素或者是body</li>
-<li>如果该元素position没有定位成relative或者absolute，父元素是直接父元素</li>
+<li><code>link</code>是HTML的标签，可被JavaScript控制，@import是CSS的标签，不能被JavaScript改变</li>
+<li><code>link</code>除了调用CSS还可以有其他作用，如声明页面属性、声明目录、RSS等，<code>@import</code>只能调用CSS</li>
+<li><code>link</code>引入的CSS和页面同时加载，<code>@import</code>引入CSS将在页面加载完成后才被加载</li>
+<li><code>@import</code>在CSS2.1才有的语法，在IE5+才能识别，<code>link</code>不存在兼容性问题</li>
+<li><code>link</code>和<code>@import</code>的样式权重和CSS权重计算一致，与代码的顺序有关，可能某些样式被覆盖</li>
+<li>如果JavaScript进行样式选择，用link，因为link是HTML元素，js可以控制</li>
 </ol>
-<p>具体使用</p>
-<ul>
-<li>width是相对于父元素的width，height是相对于父元素的height</li>
-<li>padding/margin不管上下左右，是相对于父元素的width</li>
-</ul>
-<h3 id="margin折叠"><a href="#margin折叠" class="headerlink" title="margin折叠"></a>margin折叠</h3><p>margin折叠是指毗邻的两个或多个margin会合并为一个margin  </p>
-<p>规则：</p>
-<ul>
-<li>普通流的块元素垂直方向上会折叠</li>
-<li>浮动元素或者inline-block或绝对定位的元素不会和垂直方向上的其他元素margin折叠</li>
-<li>创建了块级格式化上下文元素，不会和子元素发生margin折叠</li>
-<li>元素自身的margin-bottom和margin-bottom相邻也会折叠</li>
-</ul>
-<p>计算规则：</p>
-<ul>
-<li>正正取大值</li>
-<li>正负相加</li>
-<li>负负取绝对值较大值</li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;common.css&quot; type=&quot;text/css&quot; media=&quot;srceen&quot; /&gt;</span><br><span class="line">&lt;link rel=&quot;alternate stylesheet&quot; href=&quot;orange.css&quot; type=&quot;text/css&quot; media=&quot;srceen&quot; title=&quot;orange&quot; /&gt;</span><br><span class="line">&lt;link rel=&quot;alternate stylesheet&quot; href=&quot;blue.css&quot; type=&quot;text/css&quot; media=&quot;srceen&quot; title=&quot;blue&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function addCssByLink(url)&#123;</span><br><span class="line">    var doc = document;</span><br><span class="line">    var link = doc.createElement(&quot;link&quot;);</span><br><span class="line">    link.setAttribute(&quot;rel&quot;, &quot;stylesheet&quot;);</span><br><span class="line">    link.setAttribute(&quot;type&quot;, &quot;text/css&quot;);</span><br><span class="line">    link.setAttribute(&quot;href&quot;, url);</span><br><span class="line">    var heads = doc.getElementByTagName(&quot;head&quot;);</span><br><span class="line">    if(heads.length)&#123;</span><br><span class="line">        heads[0].appendChild(link);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        doc.documentElement.appenChild(link);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -411,6 +398,8 @@
           
             <a href="/tags/HTML/" rel="tag"># HTML</a>
           
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
         </div>
       
 
@@ -422,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/10/meta/" rel="next" title="meta标签">
-                <i class="fa fa-chevron-left"></i> meta标签
+              <a href="/2018/09/13/function/" rel="next" title="JS的函数">
+                <i class="fa fa-chevron-left"></i> JS的函数
               </a>
             
           </div>
@@ -431,10 +420,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/10/promise/" rel="prev" title="Promise">
-                Promise <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -582,7 +567,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IE盒模型和W3C盒模型的区别"><span class="nav-number">1.</span> <span class="nav-text">IE盒模型和W3C盒模型的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置盒模型"><span class="nav-number">2.1.</span> <span class="nav-text">设置盒模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对行内元素的设置"><span class="nav-number">2.2.</span> <span class="nav-text">对行内元素的设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#margin-auto的使用"><span class="nav-number">2.3.</span> <span class="nav-text">margin: auto的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百分比的使用"><span class="nav-number">2.4.</span> <span class="nav-text">百分比的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#margin折叠"><span class="nav-number">2.5.</span> <span class="nav-text">margin折叠</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS和HTML文档结合的方式"><span class="nav-number">1.</span> <span class="nav-text">CSS和HTML文档结合的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#link"><span class="nav-number">1.1.</span> <span class="nav-text">link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import"><span class="nav-number">1.2.</span> <span class="nav-text">@import</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#link和-import的区别"><span class="nav-number">2.</span> <span class="nav-text">link和@import的区别</span></a></li></ol></div>
             
 
           </div>

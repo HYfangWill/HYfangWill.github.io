@@ -249,6 +249,343 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/16/link-import/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfangwill">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hyfang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/16/link-import/" itemprop="url">link和@import</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T20:47:42+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>link和@import都是引入CSS的方式</p>
+<h2 id="CSS和HTML文档结合的方式"><a href="#CSS和HTML文档结合的方式" class="headerlink" title="CSS和HTML文档结合的方式"></a>CSS和HTML文档结合的方式</h2><ul>
+<li>使用<link>元素链接到外部的样式文件</li>
+<li><code>&lt;head></code>内使用<code>&lt;style></code></li>
+<li><code>@import</code></li>
+<li><p><code>&lt;body></code>标签里，使用style属性</p>
+<h3 id="link"><a href="#link" class="headerlink" title="link"></a>link</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;style.css&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>charset/rev/target   分别是编码/链接文档与当前文档关系/目标页面，HTML5不支持，target属性值是_blank/_self/_top/_parent/frame_name</p>
+</li>
+<li>href<br>存放链接文件路径</li>
+<li>hreflang<br>链接文件语言</li>
+<li>media<br>显示设备，如screen屏幕、print打印、all所有</li>
+<li>rel<br>当前文档与链接文档的关系，如alternate文档替代版本、author、help帮助文档、icon图标文件、license许可文件、next集合下一个文档、pingback、prefetch、prev集合上一个文档、search搜索文档、sidebar导航文档、stylesheet外部样式表、tag、index索引文档、contents文档目录、bookmark相关文档、chapter文档的章、section文档的节、subseciton文档的小节、appendix文档附录</li>
+<li>sizes：资源尺寸，只适用于icon资源，属性值为<code>heightxwidth|any</code>，height和width用<code>x</code>和<code>X</code>，any规定图标是可伸缩的</li>
+<li>type<br>链接文档的MIME类型<h3 id="import"><a href="#import" class="headerlink" title="@import"></a>@import</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    @import url(style.css)</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="link和-import的区别"><a href="#link和-import的区别" class="headerlink" title="link和@import的区别"></a>link和@import的区别</h2><ul>
+<li><p>link标签<br>HTML和XHTML都有，使网页作者可以增加HTML文档相关的额外信息，额外资源可以引入样式CSS、导航助手、属于另外形式的信息RSS、联系信息等</p>
+</li>
+<li><p>@import<br>指定导入的外部样式表及目标设备类型  </p>
+</li>
+</ul>
+<p>区别在于：</p>
+<ol>
+<li><code>link</code>是HTML的标签，可被JavaScript控制，@import是CSS的标签，不能被JavaScript改变</li>
+<li><code>link</code>除了调用CSS还可以有其他作用，如声明页面属性、声明目录、RSS等，<code>@import</code>只能调用CSS</li>
+<li><code>link</code>引入的CSS和页面同时加载，<code>@import</code>引入CSS将在页面加载完成后才被加载</li>
+<li><code>@import</code>在CSS2.1才有的语法，在IE5+才能识别，<code>link</code>不存在兼容性问题</li>
+<li><code>link</code>和<code>@import</code>的样式权重和CSS权重计算一致，与代码的顺序有关，可能某些样式被覆盖</li>
+<li>如果JavaScript进行样式选择，用link，因为link是HTML元素，js可以控制</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;common.css&quot; type=&quot;text/css&quot; media=&quot;srceen&quot; /&gt;</span><br><span class="line">&lt;link rel=&quot;alternate stylesheet&quot; href=&quot;orange.css&quot; type=&quot;text/css&quot; media=&quot;srceen&quot; title=&quot;orange&quot; /&gt;</span><br><span class="line">&lt;link rel=&quot;alternate stylesheet&quot; href=&quot;blue.css&quot; type=&quot;text/css&quot; media=&quot;srceen&quot; title=&quot;blue&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function addCssByLink(url)&#123;</span><br><span class="line">    var doc = document;</span><br><span class="line">    var link = doc.createElement(&quot;link&quot;);</span><br><span class="line">    link.setAttribute(&quot;rel&quot;, &quot;stylesheet&quot;);</span><br><span class="line">    link.setAttribute(&quot;type&quot;, &quot;text/css&quot;);</span><br><span class="line">    link.setAttribute(&quot;href&quot;, url);</span><br><span class="line">    var heads = doc.getElementByTagName(&quot;head&quot;);</span><br><span class="line">    if(heads.length)&#123;</span><br><span class="line">        heads[0].appendChild(link);</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        doc.documentElement.appenChild(link);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/13/function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfangwill">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hyfang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/13/function/" itemprop="url">JS的函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-13T00:03:55+08:00">
+                2018-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">front-end</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="函数中的"><a href="#函数中的" class="headerlink" title="函数中的()"></a>函数中的()</h2><p>()运算符，也叫分组运算符，它有多种用法：</p>
+<ul>
+<li>()存放函数参数</li>
+<li>把函数放在()中，会返回函数本身</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log((function test()&#123;return 1;&#125;)); // test()&#123;return 1;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>()紧跟在函数后面，用于调用函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(function test()&#123;return 1;&#125;()); // 1</span><br></pre></td></tr></table></figure>
+<h2 id="关于函数的使用"><a href="#关于函数的使用" class="headerlink" title="关于函数的使用"></a>关于函数的使用</h2><h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><p>函数声明存在变量提升，并且优先级高于普通变量声明，但同名变量的赋值，后赋值的语句有效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function()&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="函数表达式"><a href="#函数表达式" class="headerlink" title="函数表达式"></a>函数表达式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var test = function()&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>与函数声明不同的是，函数表达式不存在变量提升，并且，值得一提的是，使用函数声明和函数表达式，变量名所指向的内容是完全一致的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var test = function fn()&#123;</span><br><span class="line">	console.log(test == fn); // true</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br></pre></td></tr></table></figure></p>
+<h3 id="立即执行函数IIFE"><a href="#立即执行函数IIFE" class="headerlink" title="立即执行函数IIFE"></a>立即执行函数IIFE</h3><p>IIFE（imdiately invoked function expression）：用function定义函数之后，立即调用该函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(function(a)&#123;</span><br><span class="line">	a++;</span><br><span class="line">	console.log(a);</span><br><span class="line">&#125;)(1); // 2</span><br><span class="line">/*或者*/</span><br><span class="line">(function(b)&#123;</span><br><span class="line">    b--;</span><br><span class="line">    console.log(b);</span><br><span class="line">&#125;(5));</span><br><span class="line">/*或者*/</span><br><span class="line">!function()&#123;&#125;()</span><br><span class="line">+function()&#123;&#125;()</span><br><span class="line">~function()&#123;&#125;()</span><br></pre></td></tr></table></figure></p>
+<p>function关键字出现在行首，js引擎一律解释为函数声明语句，且函数声明时，js只会解析到大括号就结束，因此不能立即执行，需要在函数外添加</p>
+<h4 id="立即执行函数的应用"><a href="#立即执行函数的应用" class="headerlink" title="立即执行函数的应用"></a>立即执行函数的应用</h4><p>立即执行函数常用于第三方库，创建一个独立的隔离作用域，避免变量污染（命名冲突），JQuery开篇用的就是立即执行函数，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(function(window)&#123;</span><br><span class="line">	var msg = &quot;hello world&quot;;</span><br><span class="line">	function say()&#123;</span><br><span class="line">		var arg = arg || msg;</span><br><span class="line">		console.log(arg);</span><br><span class="line">	&#125;</span><br><span class="line">	window.say = say;</span><br><span class="line">&#125;)(window);</span><br><span class="line">window.say();</span><br></pre></td></tr></table></figure></p>
+<p>经典面试题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">	setTimeout(function()&#123;</span><br><span class="line">		console.log(i); // 1秒后，同时输出5个5</span><br><span class="line">	&#125;,1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果想依次输出0,1,2,3,4<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">	(function(ii)&#123;</span><br><span class="line">		setTimeout(function()&#123;</span><br><span class="line">			console.log(ii); // 1秒后同时输出0,1,2,3,4</span><br><span class="line">		&#125;,1000);</span><br><span class="line">	&#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果想隔1秒输出一个数字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">	(function(ii)&#123;</span><br><span class="line">		setTimeout(function()&#123;</span><br><span class="line">			console.log(ii); // 每相隔1秒输出0,1,2,3,4</span><br><span class="line">		&#125;,1000 * (ii+1));</span><br><span class="line">	&#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/12/closure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1641,313 +1978,13 @@ H --> I[浏览器布局渲染]</pre>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/09/seo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hyfangwill">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="hyfang's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/09/seo/" itemprop="url">SEO</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T12:01:23+08:00">
-                2018-09-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/front-end/" itemprop="url" rel="index">
-                    <span itemprop="name">front-end</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>搜索引擎优化，全称Search Engine Optimization，它帮助网站更加符合搜索引擎抓取和用户喜好，提升搜索结果排序名次 </p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
-<li><strong>搜索引擎蜘蛛</strong>采用深度优先+宽度优先+权重优先+重访抓取的策略，发现一个链接，下载该网页后，加入临时库，提取网页链接，再提取网页中的链接，依次循环。  <pre class="mermaid">graph LR;
-A[发现链接] --> B[下载网页];
-B --> C[加入临时库];
-C --> A;</pre></li>
-<li><strong>数据分析系统</strong>获取网页后，删除html代码提取内容，留下网页主题，删除重复网页和内容，正文内容分词并排列，存入索引库和统计词频<pre class="mermaid">graph LR;
-D[删除html代码] --> E[提取内容主题];
-E --> F[去重];
-F --> A[分词索引和统计词频];</pre>
-
-</li>
-</ul>
-<h2 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h2><ul>
-<li>meta  <ul>
-<li>title网页主题、description网页描述、keywords关键词精确</li>
-</ul>
-</li>
-<li>html、css、js  <ul>
-<li>html与css、js结构分离，重要内容优先加载、扁平化层级</li>
-</ul>
-</li>
-<li>标签<ul>
-<li>&lt;h1>的权重仅次于&lt;title>，内容精确，善用&lt;h2>&lt;em>&lt;strong>等标签</li>
-<li>&lt;img>图片设置好title或者alt属性</li>
-<li>&lt;a>标签设置好title、nofollow属性、锚文本</li>
-</ul>
-</li>
-<li>内容<ul>
-<li>第一个出现关键词最好加粗</li>
-<li>关键词频率合理增加</li>
-<li>增加友情链接、RSS订阅、站点订阅、404页面、长尾关键词</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/09/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hyfangwill">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="hyfang's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/09/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T11:34:24+08:00">
-                2018-09-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1991,7 +2028,7 @@ F --> A[分词索引和统计词频];</pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
