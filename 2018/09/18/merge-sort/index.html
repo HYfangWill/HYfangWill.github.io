@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript," />
+  <meta name="keywords" content="排序," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="this使用this是函数运行时所在的环境对象  纯粹函数调用全局调用时，this为全局对象，而在严格模式下，this会变成undefined  12345var a = 1;function test()&amp;#123;    console.log(this.a);&amp;#125;test(); // 1  作为对象方法调用this指向这个调用者  123456function test()&amp;#123">
-<meta name="keywords" content="JavaScript">
+<meta name="description" content="二路归并排序思路采用分治法，把待排序序列分为若干子序列，每个子序列是有序的，然后将2个或2个以上的有序表合并成一个新的有序表。 实例对以下数组排序    0 1 2 3 4 5 6     94 56 2 19 18 7 28      将数组分为一个元素一小组，94与56比较，2与19比较，18与7，得到     0 1 2 3 4 5 6     56 94 2 19 7 18 28">
+<meta name="keywords" content="排序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="this">
-<meta property="og:url" content="https://hyfangwill.github.io/2018/09/11/this/index.html">
+<meta property="og:title" content="二路归并排序">
+<meta property="og:url" content="https://hyfangwill.github.io/2018/09/18/merge-sort/index.html">
 <meta property="og:site_name" content="hyfang&#39;s blog">
-<meta property="og:description" content="this使用this是函数运行时所在的环境对象  纯粹函数调用全局调用时，this为全局对象，而在严格模式下，this会变成undefined  12345var a = 1;function test()&amp;#123;    console.log(this.a);&amp;#125;test(); // 1  作为对象方法调用this指向这个调用者  123456function test()&amp;#123">
+<meta property="og:description" content="二路归并排序思路采用分治法，把待排序序列分为若干子序列，每个子序列是有序的，然后将2个或2个以上的有序表合并成一个新的有序表。 实例对以下数组排序    0 1 2 3 4 5 6     94 56 2 19 18 7 28      将数组分为一个元素一小组，94与56比较，2与19比较，18与7，得到     0 1 2 3 4 5 6     56 94 2 19 7 18 28">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-16T14:31:00.476Z">
+<meta property="og:updated_time" content="2018-09-18T10:16:46.696Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="this">
-<meta name="twitter:description" content="this使用this是函数运行时所在的环境对象  纯粹函数调用全局调用时，this为全局对象，而在严格模式下，this会变成undefined  12345var a = 1;function test()&amp;#123;    console.log(this.a);&amp;#125;test(); // 1  作为对象方法调用this指向这个调用者  123456function test()&amp;#123">
+<meta name="twitter:title" content="二路归并排序">
+<meta name="twitter:description" content="二路归并排序思路采用分治法，把待排序序列分为若干子序列，每个子序列是有序的，然后将2个或2个以上的有序表合并成一个新的有序表。 实例对以下数组排序    0 1 2 3 4 5 6     94 56 2 19 18 7 28      将数组分为一个元素一小组，94与56比较，2与19比较，18与7，得到     0 1 2 3 4 5 6     56 94 2 19 7 18 28">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/11/this/"/>
+  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/18/merge-sort/"/>
 
 
 
 
 
-  <title>this | hyfang's blog</title>
+  <title>二路归并排序 | hyfang's blog</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/11/this/">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/18/merge-sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hyfangwill">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">this</h1>
+          <h1 class="post-title" itemprop="name headline">二路归并排序</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-11T20:47:46+08:00">
-                2018-09-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-18T18:11:33+08:00">
+                2018-09-18
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -342,30 +342,117 @@
       
 
       
-        <h2 id="this使用"><a href="#this使用" class="headerlink" title="this使用"></a>this使用</h2><p>this是函数运行时所在的环境对象</p>
-<ul>
-<li>纯粹函数调用<br>全局调用时，this为全局对象，而在严格模式下，this会变成undefined</li>
+        <h1 id="二路归并排序"><a href="#二路归并排序" class="headerlink" title="二路归并排序"></a>二路归并排序</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>采用分治法，把待排序序列分为若干子序列，每个子序列是有序的，然后将2个或2个以上的有序表合并成一个新的有序表。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>对以下数组排序</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>94</td>
+<td>56</td>
+<td>2</td>
+<td>19</td>
+<td>18</td>
+<td>7</td>
+<td>28 </td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>将数组分为一个元素一小组，<code>94</code>与<code>56</code>比较，<code>2</code>与<code>19</code>比较，<code>18</code>与<code>7</code>，得到</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>56</td>
+<td>94</td>
+<td>2</td>
+<td>19</td>
+<td>7</td>
+<td>18</td>
+<td>28</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li><code>56|94</code>与<code>2|19</code>比较合并，<code>7|18</code>与<code>28</code>比较合并，得到</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>19</td>
+<td>56</td>
+<td>94</td>
+<td>7</td>
+<td>18</td>
+<td>28</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li><code>2|19|56|94</code>与<code>7|18|28</code>比较合并，得到最后结果</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>7</td>
+<td>18</td>
+<td>19</td>
+<td>28</td>
+<td>56</td>
+<td>94</td>
+</tr>
+</tbody>
+</table>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 归并排序</span><br><span class="line"> * 时间O(nlogn)</span><br><span class="line"> * 空间O(n)</span><br><span class="line"> */</span><br><span class="line">void merge_array(int *a, int start, int end, int middle, int *temp) &#123;</span><br><span class="line">	int i = start;</span><br><span class="line">	int j = middle + 1;</span><br><span class="line">	int k = 0;</span><br><span class="line">	while (i &lt;= middle &amp;&amp; j &lt;= end) &#123;</span><br><span class="line">		if (a[i] &lt; a[j]) &#123;</span><br><span class="line">			temp[k++] = a[i++];</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			temp[k++] = a[j++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	while (i &lt;= middle) &#123;</span><br><span class="line">		temp[k++] = a[i++];</span><br><span class="line">	&#125;</span><br><span class="line">	while (j &lt;= end) &#123;</span><br><span class="line">		temp[k++] = a[j++];</span><br><span class="line">	&#125;</span><br><span class="line">	for (int i = 0; i &lt; k; i++) &#123;</span><br><span class="line">		a[start + i] = temp[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void merge_sort(int *a, int start, int end, int *temp) &#123;</span><br><span class="line">	if (start &lt; end) &#123;</span><br><span class="line">		int middle = (start + end) / 2;</span><br><span class="line">		merge_sort(a, start, middle, temp);</span><br><span class="line">		merge_sort(a, middle, end, temp);</span><br><span class="line">		merge_array(a, start, end, middle, temp);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void merge_sort(int *a) &#123;</span><br><span class="line">	int start = 0;</span><br><span class="line">	int end = sizeof(a);</span><br><span class="line">	int *temp = new int[sizeof(a)];</span><br><span class="line">	merge_sort(a, start, end, temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h2><ul>
+<li>是一种稳定的排序方法，不受输入数据影响，但需要额外的内存空间</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">function test()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">test(); // 1</span><br></pre></td></tr></table></figure>
-<ul>
-<li>作为对象方法调用<br>this指向这个调用者</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var obj = &#123;a: 1&#125;;</span><br><span class="line">obj.test = test;</span><br><span class="line">obj.test(); // 1</span><br></pre></td></tr></table></figure>
-<ul>
-<li>作为构造函数调用<br>使用new关键字时，将实例化一个类，原理是调用类的构造函数，将this绑定到新的对象上</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">function Person()&#123;</span><br><span class="line">    this.a = 2;</span><br><span class="line">&#125;</span><br><span class="line">var obj = new Person();</span><br><span class="line">console.log(obj.a); // 2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>apply、call调用<br>apply/call接受的第一个参数为对象，this将指向这个对象</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var obj = &#123;a: 2&#125;;</span><br><span class="line">function test()&#123;</span><br><span class="line">    console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">test.apply(obj); // 2</span><br><span class="line">test.apply(); // 1</span><br></pre></td></tr></table></figure>
-<ul>
-<li>bind调用<br>bind的第一个参数也是对象，this将指向这个对象，与apply/call不同的是，bind绑定时不会执行</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var obj = &#123;</span><br><span class="line">	a: 2</span><br><span class="line">&#125;</span><br><span class="line">function test()&#123;</span><br><span class="line">	console.log(this.a);</span><br><span class="line">&#125;</span><br><span class="line">var func = test.bind(obj);</span><br><span class="line">func(); // 2</span><br></pre></td></tr></table></figure>
-<h2 id="this的特殊情况"><a href="#this的特殊情况" class="headerlink" title="this的特殊情况"></a>this的特殊情况</h2><h3 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h3><p>setTimeout的默认定义域是全局的，执行setTimeout的this对象就是window，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var obj = &#123;</span><br><span class="line">	a: 2,</span><br><span class="line">	showName: function()&#123;</span><br><span class="line">		console.log(&quot;showName: &quot;+this.a);</span><br><span class="line">	&#125;,</span><br><span class="line">	waitShowName: function()&#123;</span><br><span class="line">		setTimeout(function()&#123;</span><br><span class="line">			console.log(&quot;waitShowName: &quot;+this.a);</span><br><span class="line">		&#125;, 1000);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.waitShowName(); // 1</span><br><span class="line">obj.showName(); // 2</span><br></pre></td></tr></table></figure></p>
-<p>如果需要改变getTimeout的对象，需要用到hack写法：==var that = this==：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">waitShowName: function()&#123;</span><br><span class="line">	var that = this;</span><br><span class="line">	setTimeout(function()&#123;</span><br><span class="line">		console.log(&quot;waitShowName: &quot;+that.a); // 2</span><br><span class="line">	&#125;, 1000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>箭头函数的this总是指向词法作用域，即最外层的调用者，不会因为调用环境改变，同时，也不会被call/apply/bind改变this</p>
 
       
     </div>
@@ -383,7 +470,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+            <a href="/tags/排序/" rel="tag"># 排序</a>
           
         </div>
       
@@ -396,8 +483,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/11/copy/" rel="next" title="浅拷贝与深拷贝">
-                <i class="fa fa-chevron-left"></i> 浅拷贝与深拷贝
+              <a href="/2018/09/18/heap-sort/" rel="next" title="堆排序">
+                <i class="fa fa-chevron-left"></i> 堆排序
               </a>
             
           </div>
@@ -405,10 +492,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/12/closure/" rel="prev" title="闭包">
-                闭包 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -556,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#this使用"><span class="nav-number">1.</span> <span class="nav-text">this使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this的特殊情况"><span class="nav-number">2.</span> <span class="nav-text">this的特殊情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout"><span class="nav-number">2.1.</span> <span class="nav-text">setTimeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数"><span class="nav-number">2.2.</span> <span class="nav-text">箭头函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二路归并排序"><span class="nav-number">1.</span> <span class="nav-text">二路归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">1.2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">1.3.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评价"><span class="nav-number">1.4.</span> <span class="nav-text">评价</span></a></li></ol></li></ol></div>
             
 
           </div>
