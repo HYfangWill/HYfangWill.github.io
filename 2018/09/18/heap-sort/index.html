@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript," />
+  <meta name="keywords" content="排序," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="深浅拷贝是针对Object和Array的复杂类型，因为JS存储对象或者数组都是存地址，与基本类型有差异以下用srcObj表示原对象或数组，newObj表示拷贝的对象或数组 浅拷贝浅拷贝是对对象地址的复制，srcObj和newObj指向同一块内存，修改其中任意的值，另一个值都会随之变化123456789101112function shadowCopy(srcObj)&amp;#123;    var ne">
-<meta name="keywords" content="JavaScript">
+<meta name="description" content="思路&amp;emsp;&amp;emsp;如按升序排列，将数组构造成一个大顶堆，根节点就是最大值，将最后一个元素交换，最后一个元素就确定了，继续将剩余的元素，重新构造一个大顶堆，再将根节点与最后一个元素交换，直到剩余1个元素就完成排序了。&amp;emsp;&amp;emsp;构造大顶堆的过程参见实例说明 概念 大顶堆：根节点大于左右节点 小顶堆：根节点小于左右节点  实例对以下数组进行排序    0 1 2 3 4 5 6">
+<meta name="keywords" content="排序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅拷贝与深拷贝">
-<meta property="og:url" content="https://hyfangwill.github.io/2018/09/11/copy/index.html">
+<meta property="og:title" content="堆排序">
+<meta property="og:url" content="https://hyfangwill.github.io/2018/09/18/heap-sort/index.html">
 <meta property="og:site_name" content="hyfang&#39;s blog">
-<meta property="og:description" content="深浅拷贝是针对Object和Array的复杂类型，因为JS存储对象或者数组都是存地址，与基本类型有差异以下用srcObj表示原对象或数组，newObj表示拷贝的对象或数组 浅拷贝浅拷贝是对对象地址的复制，srcObj和newObj指向同一块内存，修改其中任意的值，另一个值都会随之变化123456789101112function shadowCopy(srcObj)&amp;#123;    var ne">
+<meta property="og:description" content="思路&amp;emsp;&amp;emsp;如按升序排列，将数组构造成一个大顶堆，根节点就是最大值，将最后一个元素交换，最后一个元素就确定了，继续将剩余的元素，重新构造一个大顶堆，再将根节点与最后一个元素交换，直到剩余1个元素就完成排序了。&amp;emsp;&amp;emsp;构造大顶堆的过程参见实例说明 概念 大顶堆：根节点大于左右节点 小顶堆：根节点小于左右节点  实例对以下数组进行排序    0 1 2 3 4 5 6">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-16T15:01:53.781Z">
+<meta property="og:updated_time" content="2018-09-18T09:34:47.437Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅拷贝与深拷贝">
-<meta name="twitter:description" content="深浅拷贝是针对Object和Array的复杂类型，因为JS存储对象或者数组都是存地址，与基本类型有差异以下用srcObj表示原对象或数组，newObj表示拷贝的对象或数组 浅拷贝浅拷贝是对对象地址的复制，srcObj和newObj指向同一块内存，修改其中任意的值，另一个值都会随之变化123456789101112function shadowCopy(srcObj)&amp;#123;    var ne">
+<meta name="twitter:title" content="堆排序">
+<meta name="twitter:description" content="思路&amp;emsp;&amp;emsp;如按升序排列，将数组构造成一个大顶堆，根节点就是最大值，将最后一个元素交换，最后一个元素就确定了，继续将剩余的元素，重新构造一个大顶堆，再将根节点与最后一个元素交换，直到剩余1个元素就完成排序了。&amp;emsp;&amp;emsp;构造大顶堆的过程参见实例说明 概念 大顶堆：根节点大于左右节点 小顶堆：根节点小于左右节点  实例对以下数组进行排序    0 1 2 3 4 5 6">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/11/copy/"/>
+  <link rel="canonical" href="https://hyfangwill.github.io/2018/09/18/heap-sort/"/>
 
 
 
 
 
-  <title>浅拷贝与深拷贝 | hyfang's blog</title>
+  <title>堆排序 | hyfang's blog</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/11/copy/">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/18/heap-sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hyfangwill">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅拷贝与深拷贝</h1>
+          <h1 class="post-title" itemprop="name headline">堆排序</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-11T15:19:38+08:00">
-                2018-09-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-18T17:28:13+08:00">
+                2018-09-18
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -342,21 +342,57 @@
       
 
       
-        <p>深浅拷贝是针对Object和Array的复杂类型，因为JS存储对象或者数组都是存地址，与基本类型有差异<br>以下用srcObj表示原对象或数组，newObj表示拷贝的对象或数组</p>
-<h2 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h2><p>浅拷贝是对对象地址的复制，srcObj和newObj指向同一块内存，修改其中任意的值，另一个值都会随之变化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function shadowCopy(srcObj)&#123;</span><br><span class="line">    var newObj= &#123;&#125;;</span><br><span class="line">    for(var prop in srcObj)&#123;</span><br><span class="line">        newObj[prop] = srcObj[prop];</span><br><span class="line">    &#125;</span><br><span class="line">    return newObj;</span><br><span class="line">&#125;</span><br><span class="line">var srcObj = &#123;a: 1, arr: [[1, 2], 3]&#125;;</span><br><span class="line">var newObj = shadowCopy(srcObj);</span><br><span class="line">newObj.arr[0] = 0;</span><br><span class="line">console.log(srcObj);</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure></p>
-<h2 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h2><p>newObj开辟了新的内存，srcObj的各个属性都复制到新的内存里，srcObj和newObj互不影响</p>
-<ul>
-<li>JS递归方法</li>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>&emsp;&emsp;如按升序排列，将数组构造成一个大顶堆，根节点就是最大值，将最后一个元素交换，最后一个元素就确定了，继续将剩余的元素，重新构造一个大顶堆，再将根节点与最后一个元素交换，直到剩余1个元素就完成排序了。<br>&emsp;&emsp;构造大顶堆的过程参见实例说明</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>大顶堆：根节点大于左右节点</li>
+<li>小顶堆：根节点小于左右节点</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function deepcopy(srcObj, newObj)&#123;</span><br><span class="line">	var newObj = newObj || &#123;&#125;;</span><br><span class="line">	for(var prop in srcObj)&#123;</span><br><span class="line">		if(typeof srcObj[prop] === &apos;object&apos;)&#123;</span><br><span class="line">			if(srcObj[prop].constructor === Array)&#123;</span><br><span class="line">				newObj[prop] = [];</span><br><span class="line">			&#125;</span><br><span class="line">			else&#123;</span><br><span class="line">				newObj[prop] = &#123;&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			deepcopy(srcObj[prop], newObj[prop]);</span><br><span class="line">		&#125;</span><br><span class="line">		else&#123;</span><br><span class="line">			newObj[prop] = srcObj[prop];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var srcObj = &#123;a: 1, arr: [[1, 2], 3]&#125;;</span><br><span class="line">var newObj = &#123;&#125;;</span><br><span class="line">deepcopy(srcObj, newObj);</span><br><span class="line">console.log(srcObj);</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>JSON方法：如果对象存在函数，不能被拷贝；不能拷贝原对象原型链上的方法</li>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>对以下数组进行排序</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>56</td>
+<td>94</td>
+<td>2</td>
+<td>19</td>
+<td>7</td>
+<td>18</td>
+<td>28</td>
+</tr>
+</tbody>
+</table>
+<p>设定对下标为<code>N</code>节点，左子节点为<code>2<em>N+1</em></code>，右子节点为<code>2N+2</code>，在逻辑上可转换为如下二叉树：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">A(54) --&gt; B(94);</span><br><span class="line">A --&gt; C(2);</span><br><span class="line">B --&gt; D(19);</span><br><span class="line">B --&gt; E(7);</span><br><span class="line">C --&gt; F(18);</span><br><span class="line">C --&gt; G(28);</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>从最后一个非叶节点的元素<code>2</code>开始，选择子节点<code>18</code>和<code>28</code>中的较大者，与<code>2</code>比较，若大于<code>2</code>则与其进行交换，调整如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">A(54) --&gt; B(94);</span><br><span class="line">A --&gt; C(28);</span><br><span class="line">B --&gt; D(19);</span><br><span class="line">B --&gt; E(7);</span><br><span class="line">C --&gt; F(18);</span><br><span class="line">C --&gt; G(2);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>往回遍历节点，即<code>94</code>，选择子节点<code>19</code>和<code>7</code>中较大者，与<code>94</code>比较，由于<code>19</code>小于<code>94</code>，保持当前数组顺序不变，直到根节点，第一次构造大顶堆就完成了，二叉树如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">A(94) --&gt; B(54);</span><br><span class="line">A --&gt; C(28);</span><br><span class="line">B --&gt; D(19);</span><br><span class="line">B --&gt; E(7);</span><br><span class="line">C --&gt; F(18);</span><br><span class="line">C --&gt; G(2);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>将第一个节点与二叉树的最后一个节点交换，就确定了数组最后一个数据<code>94</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">A(2) --&gt; B(54);</span><br><span class="line">A --&gt; C(28);</span><br><span class="line">B --&gt; D(19);</span><br><span class="line">B --&gt; E(7);</span><br><span class="line">C --&gt; F(18);</span><br><span class="line">C --&gt; G(94);</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>再对剩下节点继续排序</li>
+</ol>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 时间复杂度 O(nlogn)</span><br><span class="line"> */</span><br><span class="line">void max_heapify(int *a, int start, int end) &#123;</span><br><span class="line">	int current = start;</span><br><span class="line">	int child = current * 2 + 1;</span><br><span class="line">	while (child &lt; end) &#123;</span><br><span class="line">		if (child + 1 &lt; end &amp;&amp; a[child] &lt; a[child + 1]) &#123;</span><br><span class="line">			child++;</span><br><span class="line">		&#125;</span><br><span class="line">		if (a[current] &lt; a[child]) &#123;</span><br><span class="line">			int temp = a[current];</span><br><span class="line">			a[current] = a[child];</span><br><span class="line">			a[child] = a[current];</span><br><span class="line">			current = child;</span><br><span class="line">			child = current * 2 + 1;</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void heap_sort(int *a) &#123;</span><br><span class="line">	for (int i = sizeof(a) / 2 - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">		max_heapify(a, i, sizeof(a) - 1);</span><br><span class="line">	&#125;</span><br><span class="line">	for (int i = sizeof(a) - 1; i &gt; 0; i--) &#123;</span><br><span class="line">		int temp = a[i];</span><br><span class="line">		a[i] = a[0];</span><br><span class="line">		a[0] = temp;</span><br><span class="line">		max_heapify(a, 0, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h2><ul>
+<li>堆排序是一种选择排序</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var srcObj = &#123;a: 1, arr: [[1, 2], 3]&#125;;</span><br><span class="line">var newObj = JSON.parse(JSON.stringify(srcObj));</span><br><span class="line">newObj.arr[0]=0;</span><br><span class="line">console.log(srcObj);</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>JQuery方法</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var newObj1 = $.extend(true, &#123;&#125;, srcObj); // 深拷贝</span><br><span class="line">var newObj2 = $.extend(false, &#123;&#125;, srcObj); // 浅拷贝</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -373,7 +409,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+            <a href="/tags/排序/" rel="tag"># 排序</a>
           
         </div>
       
@@ -386,8 +422,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/10/promise/" rel="next" title="Promise">
-                <i class="fa fa-chevron-left"></i> Promise
+              <a href="/2018/09/16/quick-sort/" rel="next" title="快速排序">
+                <i class="fa fa-chevron-left"></i> 快速排序
               </a>
             
           </div>
@@ -395,10 +431,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/11/this/" rel="prev" title="this">
-                this <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -546,7 +578,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浅拷贝"><span class="nav-number">1.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深拷贝"><span class="nav-number">2.</span> <span class="nav-text">深拷贝</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">3.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评价"><span class="nav-number">4.</span> <span class="nav-text">评价</span></a></li></ol></div>
             
 
           </div>
