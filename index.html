@@ -249,6 +249,392 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/19/event-loop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hyfangwill">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hyfang's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/19/event-loop/" itemprop="url">JS执行机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-19T15:17:30+08:00">
+                2018-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h1><h2 id="单线程执行"><a href="#单线程执行" class="headerlink" title="单线程执行"></a>单线程执行</h2><blockquote>
+<p>单线程是JavaScript语言的一大特点</p>
+</blockquote>
+<p>单线程是JavaScript语言的一大特点，也就是同一时间只能做一件事。</p>
+<blockquote>
+<p>为什么要设计为单线程？</p>
+</blockquote>
+<p>单线程机制的设计是为了配合JavaScript的用途，作为浏览器脚本语言，它主要用途是与用户交互，假如同时对同一个DOM节点添加或删除，浏览器是难以判断该以哪个线程为准的。  </p>
+<h2 id="异步机制"><a href="#异步机制" class="headerlink" title="异步机制"></a>异步机制</h2><blockquote>
+<p>为什么JS需要异步？</p>
+</blockquote>
+<p>如果不存在异步，代码容易出现阻塞，导致用户体验变差，因此JS需要实现异步。  </p>
+<blockquote>
+<p>JS如何实现异步？</p>
+</blockquote>
+<p>H5提出Web Worker的标准，允许JavaScript脚本创建多个线程，子线程受主线程的控制。<br>JS采用事件驱动的方式，通过Event Loop（事件循环）机制来实现。</p>
+<h2 id="大致过程"><a href="#大致过程" class="headerlink" title="大致过程"></a>大致过程</h2><pre class="mermaid">graph TD;
+A[任务进入执行栈] --> B{同步任务or异步任务};
+B -->|同步| C[主线程];
+C --> D[任务全部执行完毕];
+D --> E[读取任务队列中的结果进入主线程执行];
+B -->|异步| F[事件表];
+F --> G[事件队列];
+G --> E;</pre>
+
+<p>JS执行任务分为同步任务和异步任务</p>
+<ul>
+<li>同步任务</li>
+<li>异步任务<ul>
+<li>setTimeout、setInterval</li>
+<li>异步AJAX</li>
+<li>promise、process.nextTick  </li>
+</ul>
+</li>
+</ul>
+<p>任务还可以分为宏任务和微任务，会进入不同的Event Queue，分别是宏任务和微任务队列</p>
+<ul>
+<li>宏任务：进入宏任务队列<ul>
+<li>setInterval<br>会按照设定的时间间隔重复地在Event Queue注册回调函数，如果某一段时间主线程代码执行太久，那么setIntercal的回调函数可能会阻塞到一起执行，无法保持设定的时间间隔，此时用于动画，则体现为卡顿。</li>
+<li>setTimeout</li>
+</ul>
+</li>
+<li>微任务：进入微任务队列<ul>
+<li>AJAX</li>
+<li>promise、process.nextTick</li>
+</ul>
+</li>
+</ul>
+<h2 id="事件循环机制"><a href="#事件循环机制" class="headerlink" title="事件循环机制"></a>事件循环机制</h2><pre class="mermaid">graph TD
+A[执行宏任务] --> B[执行结束];
+B -->|检查Event Queue| C{是否有微任务};
+C --> D[执行所有微任务];
+D --> E[提取Event Queue第一个宏任务]
+C --> E;
+E --> A;</pre>
+
+<ul>
+<li>第一轮事件循环</li>
+</ul>
+<ol>
+<li>由主线程执行JS代码，将<code>AJAX</code>、<code>setTimeout</code>、<code>promise</code>等回调函数注册到<code>Event Queue</code>，并区分宏任务和微任务。</li>
+<li>主线程提取并执行<code>Event Queue</code>中的<code>AJAX</code>、<code>promise</code>等所有微任务，并注册微任务中的异步任务到<code>Event Queue</code>中</li>
+</ol>
+<ul>
+<li>第二轮事件循环</li>
+</ul>
+<ol start="3">
+<li>主线程提取<code>Event Queue</code>的第一个宏任务（通常是<code>setTimeout</code>）</li>
+<li>主线程执行<code>setTimeout</code>宏任务，并注册<code>setTimeout</code>代码中的异步任务到<code>Event Queue</code>中（如果有）</li>
+<li>执行<code>Event Queue</code>中所有微任务，并注册微任务中的异步任务到<code>Event Queue</code>中（如果有）</li>
+</ol>
+<ul>
+<li>继续循环<br>宏任务每执行一个，就清空当前事件队列中的微任务</li>
+</ul>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">// s1</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">	console.log(1);</span><br><span class="line">	// s2</span><br><span class="line">	setTimeout(function()&#123;</span><br><span class="line">		console.log(2);</span><br><span class="line">	&#125;);</span><br><span class="line">	// p1</span><br><span class="line">	new Promise(function(resolve)&#123;</span><br><span class="line">	    // p1-1</span><br><span class="line">		console.log(3);</span><br><span class="line">		resolve();</span><br><span class="line">	&#125;).then(function()&#123;</span><br><span class="line">	    // p1-2</span><br><span class="line">		console.log(4);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;, 0);</span><br><span class="line"></span><br><span class="line">// p2</span><br><span class="line">new Promise(function(resolve)&#123;</span><br><span class="line">    // p2-1</span><br><span class="line">	console.log(5);</span><br><span class="line">	resolve();</span><br><span class="line">&#125;).then(function()&#123;</span><br><span class="line">    // p2-2</span><br><span class="line">	console.log(6);</span><br><span class="line">	//p3</span><br><span class="line">	new Promise(function(resolve)&#123;</span><br><span class="line">	    //p3-1</span><br><span class="line">		console.log(7);</span><br><span class="line">		//s3</span><br><span class="line">		setTimeout(function()&#123;</span><br><span class="line">			console.log(8);</span><br><span class="line">		&#125;, 0);</span><br><span class="line">		resolve();</span><br><span class="line">	&#125;).then(function()&#123;</span><br><span class="line">	    //p3-2</span><br><span class="line">		console.log(9);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(10);</span><br></pre></td></tr></table></figure>
+<p>假设此时JS在执行这段代码之前，事件队列都为空</p>
+<ul>
+<li>第一轮事件循环</li>
+</ul>
+<ol>
+<li>遇到<code>s1</code>，回调函数被分发到宏任务队列中</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏任务</th>
+<th style="text-align:center">微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">s1</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>遇到<code>p2</code>，直接执行<code>console.log(5)</code>，回调函数<code>p2-2</code>分发到微任务队列中</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏任务</th>
+<th style="text-align:center">微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">s1</td>
+<td style="text-align:center">p2-2 </td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li><p>执行宏任务<code>console.log(10)</code></p>
+</li>
+<li><p>当前JS代码（宏任务）完成，开始清空所有微任务队列（<code>p2-2</code>出队），因此，执行事件<code>p2-2</code>，执行<code>console.log(6)</code>，遇到<code>p3</code>，执行<code>console.log(7)</code>，遇到<code>s3</code>，将其分发到宏任务队列中，<code>p3</code>的回调函数<code>p3-2</code>分发到微任务队列中</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏任务</th>
+<th style="text-align:center">微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">s1</td>
+<td style="text-align:center">p3-2 </td>
+</tr>
+<tr>
+<td style="text-align:center">s3</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ol start="5">
+<li>由于微任务队列仍有事件未完成，继续清空微任务队列（<code>p3-2</code>出队），因此执行<code>console.log(9)</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏任务</th>
+<th style="text-align:center">微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">s1</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">s3</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第二轮事件循环</li>
+</ul>
+<ol start="6">
+<li>当下微任务为空，提取宏任务队列第1个事件<code>s1</code>，执行<code>console.log(1)</code>，遇到<code>s2</code>，分发到宏任务队列，遇到==p1==，执行<code>console.log(3)</code>，分发回调函数<code>p1-2</code>到微任务队列中</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏任务</th>
+<th style="text-align:center">微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">s3</td>
+<td style="text-align:center">p1-2 </td>
+</tr>
+<tr>
+<td style="text-align:center">s2</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ol start="7">
+<li>一个宏任务执行完毕，检测微任务队列，开始执行<code>p1-2</code>，<code>console.log(4)</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏任务</th>
+<th style="text-align:center">微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">s3</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">s2</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第三轮事件循环</li>
+</ul>
+<ol start="8">
+<li>此时微任务队列已清空，提取第1个宏任务<code>s3</code>，执行<code>console.log(8)</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏任务</th>
+<th style="text-align:center">微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">s2</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第四轮事件循环</li>
+</ul>
+<ol start="9">
+<li>此时无微任务为空，提取第1个宏任务<code>s2</code>，执行<code>console.log(2)</code>，此时任务队列如下：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">宏任务</th>
+<th style="text-align:center">微任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>这段JS代码执行完成</p>
+<p>因此，输出如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//几乎同时输出</span><br><span class="line">5,10,6,7,9,1,3,4,8,2</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/18/merge-sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1889,193 +2275,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hyfangwill.github.io/2018/09/10/box-model/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hyfangwill">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="hyfang's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/10/box-model/" itemprop="url">CSS盒模型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T22:33:41+08:00">
-                2018-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/images/box-model.png" alt="盒模型"></p>
-<h2 id="IE盒模型和W3C盒模型的区别"><a href="#IE盒模型和W3C盒模型的区别" class="headerlink" title="IE盒模型和W3C盒模型的区别"></a>IE盒模型和W3C盒模型的区别</h2><ul>
-<li>width和height<br>IE盒模型content+padding+border，W3C盒模型content</li>
-</ul>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="设置盒模型"><a href="#设置盒模型" class="headerlink" title="设置盒模型"></a>设置盒模型</h3><ul>
-<li>box-sizing可以改变浏览器默认的盒模型<ul>
-<li>content-box：W3C盒模型</li>
-<li>padding-box：content+padding==width</li>
-<li>border-box：IE盒模型</li>
-</ul>
-</li>
-</ul>
-<h3 id="对行内元素的设置"><a href="#对行内元素的设置" class="headerlink" title="对行内元素的设置"></a>对行内元素的设置</h3><ul>
-<li>width/height无效</li>
-<li>padding-top/padding-bottom/margin-top/margin-bottom无效</li>
-<li>padding-left/padding-right/margin-left/margin-right有效</li>
-<li>line-height有效</li>
-</ul>
-<h3 id="margin-auto的使用"><a href="#margin-auto的使用" class="headerlink" title="margin: auto的使用"></a>margin: auto的使用</h3><ul>
-<li>元素没有设置width和height，会自动填充容器</li>
-<li>元素设置了width或height（有效情况下），自动填充会被覆盖，margin为0，因此如果margin设置为auto，可以填充空白，使得元素水平居中</li>
-</ul>
-<h3 id="百分比的使用"><a href="#百分比的使用" class="headerlink" title="百分比的使用"></a>百分比的使用</h3><p>百分比是相对父元素而言的，这个父元素分为两种：</p>
-<ol>
-<li>如果该元素position没有定位成relative或者absolute，父元素是已经定位的父元素或者是body</li>
-<li>如果该元素position没有定位成relative或者absolute，父元素是直接父元素</li>
-</ol>
-<p>具体使用</p>
-<ul>
-<li>width是相对于父元素的width，height是相对于父元素的height</li>
-<li>padding/margin不管上下左右，是相对于父元素的width</li>
-</ul>
-<h3 id="margin折叠"><a href="#margin折叠" class="headerlink" title="margin折叠"></a>margin折叠</h3><p>margin折叠是指毗邻的两个或多个margin会合并为一个margin  </p>
-<p>规则：</p>
-<ul>
-<li>普通流的块元素垂直方向上会折叠</li>
-<li>浮动元素或者inline-block或绝对定位的元素不会和垂直方向上的其他元素margin折叠</li>
-<li>创建了块级格式化上下文元素，不会和子元素发生margin折叠</li>
-<li>元素自身的margin-bottom和margin-bottom相邻也会折叠</li>
-</ul>
-<p>计算规则：</p>
-<ul>
-<li>正正取大值</li>
-<li>正负相加</li>
-<li>负负取绝对值较大值</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2126,7 +2325,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
